@@ -1,0 +1,116 @@
+{
+	"info": {
+		"_postman_id": "96d9045b-89d4-4f12-9dbe-da8f4d89a612",
+		"name": "OCRSample",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "FileUpload",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "",
+							"type": "file",
+							"src": "/E:/AOAN/ocr/Source/TradeLicense/Trade License.pdf"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/COB/fileUpload?stepId=GETTRADELICENSE&appId=1307&Id=0&doIncreaseStep=false&action=ReUpload",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"COB",
+						"fileUpload"
+					],
+					"query": [
+						{
+							"key": "stepId",
+							"value": "GETTRADELICENSE"
+						},
+						{
+							"key": "appId",
+							"value": "1307"
+						},
+						{
+							"key": "Id",
+							"value": "0"
+						},
+						{
+							"key": "doIncreaseStep",
+							"value": "false"
+						},
+						{
+							"key": "action",
+							"value": "ReUpload"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FileUpload Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "",
+							"type": "file",
+							"src": "/E:/AOAN/ocr/Source/TradeLicense/Trade License.pdf"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/COB/fileUpload?stepId=GETTRADELICENSE&appId=1307&Id=0&doIncreaseStep=false&action=ReUpload",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"COB",
+						"fileUpload"
+					],
+					"query": [
+						{
+							"key": "stepId",
+							"value": "GETTRADELICENSE"
+						},
+						{
+							"key": "appId",
+							"value": "1307"
+						},
+						{
+							"key": "Id",
+							"value": "0"
+						},
+						{
+							"key": "doIncreaseStep",
+							"value": "false"
+						},
+						{
+							"key": "action",
+							"value": "ReUpload"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
