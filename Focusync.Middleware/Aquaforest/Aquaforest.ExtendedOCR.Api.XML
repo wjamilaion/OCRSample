@@ -1,0 +1,1840 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Aquaforest.ExtendedOCR.Api</name>
+    </assembly>
+    <members>
+        <member name="T:Aquaforest.ExtendedOCR.Api.AsianOCREngine">
+            <summary>
+            The Asian OCR engine to use.
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.AsianOCREngine.OcrAsian1">
+            <summary>
+            Asian OCR engine 1
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.AsianOCREngine.OcrAsian2">
+            <summary>
+            Asian OCR engine 2
+            </summary>
+        </member>
+        <member name="T:Aquaforest.ExtendedOCR.Api.PdfToImageBpp">
+            <summary>
+            The "Bits Per Pixel" to use for the rasterized PDF page. This only applies for documents that are not processed using Native mode.
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.PdfToImageBpp.Bpp_1">
+            <summary>
+            1 bit per pixel
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.PdfToImageBpp.Bpp_24">
+            <summary>
+            24 bits per pixel
+            </summary>
+        </member>
+        <member name="T:Aquaforest.ExtendedOCR.Api.PdfToImageDpi">
+            <summary>
+            The DPI to use for the rasterized page.
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.PdfToImageDpi.DPI_72">
+            <summary>
+            72 DPI
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.PdfToImageDpi.DPI_100">
+            <summary>
+            100 DPI
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.PdfToImageDpi.DPI_150">
+            <summary>
+            150 DPI
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.PdfToImageDpi.DPI_200">
+            <summary>
+            200 DPI
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.PdfToImageDpi.DPI_300">
+            <summary>
+            300 DPI
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.PdfToImageDpi.DPI_400">
+            <summary>
+            400 DPI
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.PdfToImageDpi.DPI_500">
+            <summary>
+            500 DPI
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.PdfToImageDpi.DPI_600">
+            <summary>
+            600 DPI
+            </summary>
+        </member>
+        <member name="T:Aquaforest.ExtendedOCR.Api.InterpolationMode">
+            <summary>
+            Interpolation algorithms.
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.InterpolationMode.Normal">
+            <summary>
+            Normal interpolation mode.
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.InterpolationMode.Fast">
+            <summary>
+            Fast interpolation mode.
+            </summary>
+        </member>
+        <member name="T:Aquaforest.ExtendedOCR.Api.BinarizationMode">
+            <summary>
+            The binarization algorithm to use.
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.BinarizationMode.Threshold">
+            <summary>
+            Applies the fixed threshold for binarization. If the threshold provided is 0, the image is analyzed to automatically compute a threshold for the whole document.
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.BinarizationMode.Adaptive">
+            <summary>
+            Performs adaptive binarization. The adaptive binarization determines local thresholds.
+            </summary>
+        </member>
+        <member name="T:Aquaforest.ExtendedOCR.Api.DeskewAdjustmentMode">
+            <summary>
+            The behavior regarding dimension adjustment for deskew operation.
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.DeskewAdjustmentMode.None">
+            <summary>
+            Do not perform dimensions adjustment. The deskewed image dimensions will be slightly bigger than the original image if a skew angle has been detected.
+            This is the fastest mode, and ensures that all the information on the image is kept.
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.DeskewAdjustmentMode.Crop">
+            <summary>
+            If a skew angle is found, crop the deskewed image so that its dimensions matches the original image's dimensions.
+            This guarantees that the created output document will have the proper dimensions when it's according to a standard (e.g. A4 paper size).
+            Note that if the image contains data very close to the borders, it will be removed by the crop operation.
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.DeskewAdjustmentMode.CropIfPossible">
+            <summary>
+            If a skew angle is found, the image will get cropped later on when running page recognition, only if no zones are detected in the area that will get cropped.
+            This ensure that no data will be lost by cropping, and that the created output document will match original sizing whenever possible.
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.DeskewAdjustmentMode.ContentAwareResize">
+            <summary>
+            If a skew angle is found, the image will be resized to its original dimensions using a content-aware algorithm. This algorithm ensures that valuable
+            information on the image (like text or graphics) will be kept in priority, which results in mainly "empty" areas being affected.
+            <para/>
+            <b>Note: </b> This adjust mode is slower than the others; for instance, resizing an A4 image at 300 DPI with a moderate skew angle can take a few seconds.
+            </summary>
+        </member>
+        <member name="T:Aquaforest.ExtendedOCR.Api.ExtractImageMethod">
+            <summary>
+            Whether to convert the images in a PDF document to TIFF or not.
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.ExtractImageMethod.Native">
+            <summary>
+            This method places the OCRed text directly into a copy of the
+            original PDF rather than creating an entirely new PDF.
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.ExtractImageMethod.ConvertToTiff">
+            <summary>
+            The PDF is rasterized to create an image of each page in the PDF.
+            </summary>
+        </member>
+        <member name="T:Aquaforest.ExtendedOCR.Api.IHQCCompressionLevel">
+            <summary>
+            The IHQC compression level. <para />
+            <b>Note: </b> PDF 1.4 A-1a and PDF 1.4 A-1b only supports level 1.
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.IHQCCompressionLevel.Level1">
+            <summary>
+            Level I (Acrobat 5.0 and higher)
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.IHQCCompressionLevel.Level2a">
+            <summary>
+            Level II spec a
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.IHQCCompressionLevel.Level2b">
+            <summary>
+            Level II spec b
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.IHQCCompressionLevel.Level3">
+            <summary>
+            Level III (Acrobat 6.0 and higher)
+            </summary>
+        </member>
+        <member name="T:Aquaforest.ExtendedOCR.Api.IHQCQualityFactor">
+            <summary>
+            The IHQC quality factor.
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.IHQCQualityFactor.MinimalSize">
+            <summary>
+            Minimal size
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.IHQCQualityFactor.VerySmallSize">
+            <summary>
+            Very small size
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.IHQCQualityFactor.SmallSize">
+            <summary>
+            Small size
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.IHQCQualityFactor.FavorSizeOverQuality">
+            <summary>
+            Favor size over quality
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.IHQCQualityFactor.Medium">
+            <summary>
+            Medium
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.IHQCQualityFactor.FavorQualityOverSize">
+            <summary>
+            Favor quality over size
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.IHQCQualityFactor.HighQuality">
+            <summary>
+            High quality
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.IHQCQualityFactor.VeryHighQuality">
+            <summary>
+            Very high quality
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.IHQCQualityFactor.MaximalQuality">
+            <summary>
+            Maximal quality
+            </summary>
+        </member>
+        <member name="T:Aquaforest.ExtendedOCR.Api.Jpeg2000CompressionMode">
+            <summary>
+            The JPEG 2000 compression mode.
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.Jpeg2000CompressionMode.JPEG2000_QUALITY_FACTOR">
+            <summary>
+            Use quality factor.
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.Jpeg2000CompressionMode.JPEG2000_TARGET_FILE_SIZE">
+            <summary>
+            Use target file size.
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.Jpeg2000CompressionMode.JPEG2000_COMPRESSION_RATIO">
+            <summary>
+            Use compression ratio.
+            </summary>
+        </member>
+        <member name="T:Aquaforest.ExtendedOCR.Api.Layout">
+            <summary>
+            The layout to use when generating non-PDF documents such as TXT, DOCX, RTF, etc.
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.Layout.Standard">
+            <summary>
+            Standard layout
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.Layout.Flow">
+            <summary>
+            Flow layout. This will merge lines into paragraphs and will insert breaks if there are any columns.
+            </summary>
+        </member>
+        <member name="T:Aquaforest.ExtendedOCR.Api.NonImagePDF">
+            <summary>
+            This allows control over the treatment of non image-only PDFs, i.e. PDFs that have some text in them as well as images.
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.NonImagePDF.OCR">
+            <summary>
+            The  document  will be OCRed  using  the  image extraction
+            method defined by "ExtractImageMethod".
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.NonImagePDF.RaiseError">
+            <summary>
+            The task will terminate with an error.
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.NonImagePDF.Skip">
+            <summary>
+            The document will not be processed.
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.NonImagePDF.PassThrough">
+            <summary>
+            The  file  will  not  be  processed,  but  a copy of the document
+            will be  made and  named as if the processing had occurred.
+            </summary>
+        </member>
+        <member name="T:Aquaforest.ExtendedOCR.Api.PdfToImageCompression">
+            <summary>
+            The compression to use for images extracted or rasterized from each PDF page.
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.PdfToImageCompression.CCITT4">
+            <summary>
+            The CCITT4 compression schema is used.
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.PdfToImageCompression.LZW">
+            <summary>
+            The LZW compression schema is used.
+            </summary>
+        </member>
+        <member name="T:Aquaforest.ExtendedOCR.Api.PDFVersion">
+            <summary>
+            Set the PDF Version of the output file. <para />
+            <b>Note: </b>This will only affect documents that are not processed natively and documents that are converted to PDF/A.
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.PDFVersion.PDF_1_4">
+            <summary>
+            PDF 1.4 - 2001 - Acrobat 5.0 + JBIG2; RC4 encryption key lengths greater than 40bits (128bits); Extensible Metadata Platform (XMP); Tagged PDF
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.PDFVersion.PDF_A1b">
+            <summary>
+            PDF 1.4 A-1b. Requires <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.ExtractImageMethod"/> set to <see cref="F:Aquaforest.ExtendedOCR.Api.ExtractImageMethod.ConvertToTiff"/>.
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.PDFVersion.PDF_A1a">
+            <summary>
+            PDF 1.4 A-1a. Requires <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.ExtractImageMethod"/> set to <see cref="F:Aquaforest.ExtendedOCR.Api.ExtractImageMethod.ConvertToTiff"/>.
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.PDFVersion.PDF_1_5">
+            <summary>
+            PDF 1.5 - 2003 - Acrobat 6.0 + JPEG 2000
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.PDFVersion.PDF_1_6">
+            <summary>
+            PDF 1.6 - 2005 - Acrobat 7.0 + AES encryption
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.PDFVersion.PDF_1_7">
+            <summary>
+            PDF 1.7 - 2006 - Acrobat 8.0 -> 2008 - ISO 32000-1:2008
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.PDFVersion.PDF_A2b">
+            <summary>
+            PDF 1.7 A-2b. Requires <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.ExtractImageMethod"/> set to <see cref="F:Aquaforest.ExtendedOCR.Api.ExtractImageMethod.ConvertToTiff"/>.
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.PDFVersion.PDF_A2a">
+            <summary>
+            PDF 1.7 A-2a. Requires <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.ExtractImageMethod"/> set to <see cref="F:Aquaforest.ExtendedOCR.Api.ExtractImageMethod.ConvertToTiff"/>.
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.PDFVersion.PDF_1_7_3">
+            <summary>
+            PDF 1.7 - 2008 - Adobe Extension Level 3 / Acrobat 9.0 + 256-bit AES encryption
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.PDFVersion.PDF_1_7_5">
+            <summary>
+            PDF 1.7 - 2009 - Adobe Extension Level 5 / Acrobat 9.1
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.PDFVersion.PDF_1_7_8">
+            <summary>
+            PDF 1.7 - 2011 - Adobe Extension Level 8 / Acrobat X
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.PDFVersion.PDF_A3b">
+            <summary>
+            PDF A-3b. Requires <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.ExtractImageMethod"/> set to <see cref="F:Aquaforest.ExtendedOCR.Api.ExtractImageMethod.ConvertToTiff"/>.
+            </summary>
+        </member>
+        <member name="T:Aquaforest.ExtendedOCR.Api.SegmentationMode">
+            <summary>
+            IHQC segmentation modes.
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.SegmentationMode.Color">
+            <summary>
+            IHQC segmentation only with input color image.
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.SegmentationMode.BWhite_and_color">
+            <summary>
+            IHQC segmentation with dual stream images.
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.SegmentationMode.Dualstream">
+            <summary>
+            IHQC segmentation with input color image and input black and white image.
+            </summary>
+        </member>
+        <member name="T:Aquaforest.ExtendedOCR.Api.SupportedLanguages">
+            <summary>
+            Extended OCR accepts up to 8 recognition languages at a time. This is helpful to process mixed documents but, because of the various character sets, not all combinations are allowed.
+            For this reason, the multiple languages support is limited to a single alphabet. For example, Russian and French can't be mixed. <br/><br/>
+            <para>
+            <b>Note: </b><br/>
+            <ul>
+            <li>Asian languages can't be mixed. </li>
+            <li>Extended OCR SDK cannot load more than one Asian language at a time. </li>
+            </ul>
+            </para>
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.SupportedLanguages.English">
+            <summary>
+            English (American)
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.SupportedLanguages.Japanese">
+            <summary>
+            You will need to have the Asian OCR license to use this language.
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.SupportedLanguages.Korean">
+            <summary>
+            You will need to have the Asian OCR license to use this language.
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.SupportedLanguages.Schinese">
+            <summary>
+            You will need to have the Asian OCR license to use this language.
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.SupportedLanguages.Tchinese">
+            <summary>
+            You will need to have the Asian OCR license to use this language.
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.SupportedLanguages.None">
+            <summary>
+            No language, Latin alphabet
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.SupportedLanguages.Hebrew">
+            <summary>
+            You will need to have the Hebrew OCR license to use this language.
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.SupportedLanguages.Numeric">
+            <summary>
+            This language limits recognition to numeric characters.
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.SupportedLanguages.Arabic">
+            <summary>
+            You will need to have the Arabic OCR license to use this language.<para/>
+            Note: <para/>
+              - You need to set <see cref="T:Aquaforest.ExtendedOCR.Api.ExtractImageMethod"/> to <see cref="F:Aquaforest.ExtendedOCR.Api.ExtractImageMethod.ConvertToTiff"/> to use Arabic language<para/>
+              - Arabic and English: Works only for Arabic texts with embedded English words. The result for a zone with only English will be empty.
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.SupportedLanguages.Farsi">
+            <summary>
+            You will need to have the Arabic OCR license to use this language.<para/>
+            Note: <para/>
+              - You need to set <see cref="T:Aquaforest.ExtendedOCR.Api.ExtractImageMethod"/> to <see cref="F:Aquaforest.ExtendedOCR.Api.ExtractImageMethod.ConvertToTiff"/> to use Arabic language<para/>
+              - Arabic and English: Works only for Arabic texts with embedded English words. The result for a zone with only English will be empty.
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.SupportedLanguages.BosnianLatin">
+            <summary>
+            Bosnian (Latin). CharsetCategory.E
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.SupportedLanguages.BosnianCyrillic">
+            <summary>
+            Bosnian (Cyrillic). CharsetCategory.D
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.SupportedLanguages.Moldovan">
+            <summary>
+            Moldovan. CharsetCategory.E
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.SupportedLanguages.SwissGerman">
+            <summary>
+            German (Switzerland). CharsetCategory.C
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.SupportedLanguages.Tetum">
+            <summary>
+            Tetum. CharsetCategory.C
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.SupportedLanguages.Kazakh">
+            <summary>
+            Kazakh (Cyrillic). CharsetCategory.D
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.SupportedLanguages.MongolianCyrillic">
+            <summary>
+            Mongolian (Cyrillic). CharsetCategory.D
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.SupportedLanguages.UzbekLatin">
+            <summary>
+            Uzbek (Latin). CharsetCategory.C
+            </summary>
+        </member>
+        <member name="T:Aquaforest.ExtendedOCR.Api.TextDirection">
+            <summary>
+            The text direction (for Asian languages only).
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.TextDirection.Unknown">
+            <summary>
+            Unknown text direction.
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.TextDirection.LeftToRight">
+            <summary>
+            The text runs from left to right.
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.TextDirection.TopToBottom">
+            <summary>
+            Text goes top to bottom.
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.TextDirection.RightToLeft">
+            <summary>
+            Text goes right to left.
+            </summary>
+        </member>
+        <member name="T:Aquaforest.ExtendedOCR.Api.TextSpacing">
+            <summary>
+            The text spacings
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.TextSpacing.Fixed">
+            <summary>
+            Fixed text spacing. You need to set a value for <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.CharactersPerInch"/> when using fixed text spacing.
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.TextSpacing.Proportional">
+            <summary>
+            Proportional text spacing.
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.TextSpacing.Unknown">
+            <summary>
+            Unknown text spacing.
+            </summary>
+        </member>
+        <member name="T:Aquaforest.ExtendedOCR.Api.TextType">
+            <summary>
+            The text types
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.TextType.Normal">
+            <summary>
+            Normal text.
+            </summary>
+        </member>
+        <member name="F:Aquaforest.ExtendedOCR.Api.TextType.DotMatrix">
+            <summary>
+            Dot matrix text.
+            </summary>
+        </member>
+        <member name="T:Aquaforest.ExtendedOCR.Api.Ocr">
+            <summary>
+            This class configures and performs the Optical Character Recognition (OCR) for the Extended engine. <para/>
+            <b>Note: </b>This class is not thread-safe. It should only be used to process one document and disposed after processing.
+            A new instance must be initialised for each subsequent document that needs to be processed.
+            </summary>
+            <threadsafety static="false" instance="false" />
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.AsianOCREngine">
+            <summary>
+            Set the Asian OCR engine to use when processing documents with Asian languages. Default is 'OcrAsian1'.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.Author">
+            <summary>
+            Set a custom Author in the output PDF document properties.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.CharactersPerInch">
+            <summary>
+            The number of characters per inch (cpi) (for fixed text spacing: <see cref="F:Aquaforest.ExtendedOCR.Api.TextSpacing.Fixed"/> ).
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.CreationDate">
+            <summary>
+            Set a custom creation date in the output PDF document properties.<para />
+            <b>Note:</b> If you are setting the date through the properties.xml, then the date string should be in the format 'yyyy-MM-dd HH:mm:ss'.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.EmbedFonts">
+            <summary>
+            Set the flag indicating whether to embed fonts in the output PDF document. <para />
+            <b>Note:</b> It is not recommended to embed fonts because it increases the file size. Unless you have some special needs, it is strongly advised to disable embedding fonts.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.EnableConsoleOutput">
+            <summary>
+            If enabled then progress messages will be sent to the console. Default is <see langword="true"/>.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.EnableCsvOutput">
+            <summary>
+            Enable or disable CSV file output.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.EnableDebugOutput">
+            <summary>
+             If enabled then debug messages will be written to the console output.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.EnableDocxOutput">
+            <summary>
+            Enable or disable DOCX file output.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.EnableEpubOutput">
+            <summary>
+            Enable or disable ePUB file output. <para />
+            EPUB (short for electronic publication) is an e-book standard by the International Digital Publishing Forum (IDPF). Files have the extension .epub.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.EnableExcelMlOutput">
+            <summary>
+            Enable or disable ExcelMlOutput file output.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.EnableHtmlOutput">
+            <summary>
+            Enable or disable HTML file output.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.EnableOpenDocumentTextOutput">
+            <summary>
+            Enable or disable Open document text file output.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.EnablePdfOutput">
+            <summary>
+            Enable or disable PDF file output.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.EnableRtfOutput">
+            <summary>
+            Enable or disable RTF file output.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.EnableTextOutput">
+            <summary>
+            Enable or disable text file output.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.EnableWordMlOutput">
+            <summary>
+            Enable or disable WordMl file output.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.EnableXlsxOutput">
+            <summary>
+            Enable or disable XLSX file output.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.EnableXpsOutput">
+            <summary>
+            Enable or disable XPS file output.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.EndPage">
+            <summary>
+            Sets the last page of the source file that the OCR process will be run to (for a multipage source).
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.ExtractImageMethod">
+            <summary>
+            This  allows  control  over  the  method  used  to  extract  images from PDF files for OCR processing.
+            The default value is 'Native'.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.GetAdvancedOCRData">
+            <summary>
+            Set this to <see langword="true"/> to get advanced <see cref="T:Aquaforest.ExtendedOCR.Shared.CharacterData"/> information (<see cref="T:Aquaforest.ExtendedOCR.Shared.AdvancedCharacterData"/>), Character confidence score (<see cref="T:Aquaforest.ExtendedOCR.Shared.AdvancedCharacterData"/>.<see cref="P:Aquaforest.ExtendedOCR.Shared.AdvancedCharacterData.ConfidenceScore"/>) as well as Word confidence score (<see cref="T:Aquaforest.ExtendedOCR.Shared.WordData"/>.<see cref="P:Aquaforest.ExtendedOCR.Shared.WordData.ConfidenceScore"/>) and Page confidence score (<see cref="T:Aquaforest.ExtendedOCR.Shared.StatusUpdateEventArgs"/>.<see cref="P:Aquaforest.ExtendedOCR.Shared.StatusUpdateEventArgs.ConfidenceScore"/>).
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.GetPdfTextTimeout">
+            <summary>
+            The maximum time (in milliseconds) to check if a PDF document contains text or not.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.HandleExceptionsInternally">
+            <summary>
+             When set to <see langword="true"/> the OCR object will catch any exceptions for method calls and simply return <see langword="false"/> from the method.
+             The exceptions caught are stored in the <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.LastException"/> property overwriting any previous value.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.IHQCCompression">
+            <summary>
+            The IHQC Compression settings to use for PDF and XPS output formats.<para />
+            <b>Note:</b> You will need to have an IHQC license to use this option.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.Languages">
+            <summary>
+            Extended OCR accepts up to 8 recognition languages at a time. This is helpful to process mixed documents but, because of the various character sets, not all combinations are allowed.
+            For this reason, the multiple languages support is limited to a single alphabet. For example, Russian and French can't be mixed. <para/>
+            <b>Note:</b><br/>
+            <ul>
+            <li>Asian languages can't be mixed. </li>
+            <li>Extended OCR SDK cannot load more than one Asian language at a time. </li>
+            </ul>
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.Language">
+            <summary>
+            Select the language to use for OCR processing. This will determine the dictionary that is used. If no language is set by the user, English will be used.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.LanguageDetection">
+            <summary>
+            Property that enables or disables the Auto Language Detection feature. The aim of this feature is to detect the most probable language of a <b>single-language page</b>.
+            <para />
+            If at least one language has been detected, recognition will be performed in the first language candidate that has been detected, and not in the language(s) set through <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.Language"/> or <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.Languages"/>.
+            If it fails to detect a language, recognition will be performed using the language(s) set through <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.Language"/> or <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.Languages"/>.
+            <para/>
+            Default is <see langword="false"/>.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.LastException">
+            <summary>
+             Stores last exception caught by the OCR object.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.Layout">
+            <summary>
+            Select the layout to be used for docx and rtf output.
+            The default value is 'Standard'.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.License">
+            <summary>
+             Specifies the license key.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.LicenseInfo">
+            <summary>
+            Gets the current license information.<para />
+            <b>Note:</b> This needs to be called after setting  <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.License"/>.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.LimitCharsetCharacters">
+            <summary>
+            Use this property to limit the characters to recognize to only the value specified.<para/>
+            Enter a Unicode string that contains the new character set.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.LogFilePath">
+            <summary>
+            Gets the path of the log file where output is written to if <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.LogToFile"/> property is set to <see langword="true"/>.<para />
+            <b>Note:</b> The value for this property must be accessed after calling <see cref="M:Aquaforest.ExtendedOCR.Api.Ocr.Recognize(Aquaforest.ExtendedOCR.Api.PreProcessor)"/>.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.LogToFile">
+            <summary>
+            Set this to <see langword="true"/> if you want to log output to a file. The file will be stored in the TempFolder specified.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.ModifiedDate">
+            <summary>
+            Set a custom modified date in the output PDF document properties.<para />
+            <b>Note:</b> If you are setting the date through the properties.xml, then the date string should be in the format 'yyyy-MM-dd HH:mm:ss'.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.NoOcr">
+            <summary>
+            Set this to <see langword="true"/> if you do not want to OCR the source document. This could be useful if you want to convert a TIFF to an image-only PDF.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.NumberPages">
+            <summary>
+            Returns the number pages in a document.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.PDFImageCompression">
+            <summary>
+            The compression parameters to use for color JPEG images in generated PDFs. <para />
+            <b>Note:</b> This won't be used if you set <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.ExtractImageMethod"/> to 'Native' because the 'Native' method does  not make any changes to the PDF file.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.PdfToImageExtractionTimeout">
+            <summary>
+            The maximum time (in milliseconds) to take to get image(s) from a PDF page.
+            Default value is 100,000 ms.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.PDFVersion">
+            <summary>
+            The PDF version of the resulting output document. The default value is 1.4. <para />
+            <b>Note:</b> This won't be used if you set <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.ExtractImageMethod"/> to 'Native' because the 'Native' method does not make any changes to the PDF file.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.ProcessPageTimeout">
+            <summary>
+            The maximum time (in milliseconds) to take to process a page (i.e. apply pre-processing and OCR).
+            Default value is 300,000 ms.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.ReadBmpViaFreeImage">
+            <summary>
+            Contact technical support (<a href="mailto:support@aquaforest.com">support@aquaforest.com</a>) for guidance on using this property.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.RemoveExistingPDFText">
+            <summary>
+            This applies only when a PDF is being used as the source for OCR. When set to <see langword="true"/> this will not include any searchable text that already exists from the source document.
+            Such functionality might be useful if the source document was created by OCR of an image only PDF or other image file and the quality of the text from the previous OCR is poor. <para />
+            <b>Note:</b> There is no way to distinguish text added as a result of OCR from text added by other means and as a result this option should be used with care.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.RetainBookmarks">
+            <summary>
+            Retains any bookmarks from the source file in the output when using <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.ExtractImageMethod"/>.<see cref="F:Aquaforest.ExtendedOCR.Api.ExtractImageMethod.ConvertToTiff"/>.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.RetainMetadata">
+            <summary>
+            Retains any metadata from the source file in the output when using <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.ExtractImageMethod"/>.<see cref="F:Aquaforest.ExtendedOCR.Api.ExtractImageMethod.ConvertToTiff"/>.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.RetainViewerPreferences">
+            <summary>
+            Retains any PDF Viewer Preferences, Page Mode and Page Layout from source file in the output when using <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.ExtractImageMethod"/>.<see cref="F:Aquaforest.ExtendedOCR.Api.ExtractImageMethod.ConvertToTiff"/>.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.RetainCreationDate">
+            <summary>
+            Retains the creation date of the source file in the output PDF document properties.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.RetainModifiedDate">
+            <summary>
+            Retains the modified date of the source file in the output PDF document properties.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.StartPage">
+            <summary>
+            Sets the first page of the source file where OCR recognition will begin from (for a multi-page source).
+            </summary>
+        </member>
+        <member name="E:Aquaforest.ExtendedOCR.Api.Ocr.StatusUpdate">
+            <summary>
+            This event is raised when processing of a page is complete. The <see cref="T:Aquaforest.ExtendedOCR.Shared.StatusUpdateEventArgs"/> object provides access to information relating to the status of the page processed.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.TextDirection">
+            <summary>
+            Sets the text direction (for Asian languages only).
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.TextSpacing">
+            <summary>
+            Sets the text spacing.<para/>
+            Default is <see cref="F:Aquaforest.ExtendedOCR.Api.TextSpacing.Unknown"/>.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.TextType">
+            <summary>
+            Sets the text type. <para/>
+            Default is <see cref="F:Aquaforest.ExtendedOCR.Api.TextType.Normal"/>.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.ThreadCount">
+            <summary>
+            The number of worker threads that are used for performing page recognition. Please note that, in order to get the best performance,
+            the number of worker threads need to be set accordingly to your system capabilities. Aquaforest Extended OCR provides an "automatic"
+            mode for balancing the number of work threads based on the system where it is executed. In order to activate this mode, set this value to 0.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.TempFolder">
+            <summary>
+            The temporary folder used to keep the intermediary processing files.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.UserLexicon">
+            <summary>
+            The path to the custom user lexicon file.<para/>
+            Adds a user lexicon to the existing decision environment. This is particularly useful for texts having specific terms.<para/>
+            A user lexicon is a list of words put into a Unicode text file. Each word is separated by either a space, a tab or a carriage return (CR).
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.ValidatePDFA">
+            <summary>
+            Whether or not to validate the PDF/A document after conversion (<see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.PDFVersion"/> must be set to a PDF/A version).
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.WorkDepth">
+            <summary>
+            This property can have values going from 0 to 255 (0 meaning "best speed" and 255 "best accuracy"). <para />
+            Increasing the work depth allows the OCR engine to spend more time on low-quality documents.<para />
+            The "work depth" indicates how deep the engine is allowed to work in order to find a satisfactory result.<para />
+            For documents of good quality, the engine will find a satisfactory result at an early stage and there will not be much speed differences between "best speed" and "best accuracy".<para />
+            For bad quality documents, if allowed by "word depth", the engine will work deeper. The accuracy will be better but at the price of speed.<para />
+            Default value is 100.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Ocr.Version">
+            <summary>
+             Returns the version of the SDK being used.
+            </summary>
+        </member>
+        <member name="T:Aquaforest.ExtendedOCR.Api.Ocr.StatusUpdateEventHandler">
+            <summary>
+            The event handler for <see cref="E:Aquaforest.ExtendedOCR.Api.Ocr.StatusUpdate"/> event.
+            </summary>
+            <param name="sender"></param>
+            <param name="pageInfo"></param>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Api.Ocr.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Aquaforest.ExtendedOCR.Api.Ocr"/> class.<para />
+            <b>Note: </b>This class is not thread-safe. It should only be used to process one document and disposed after processing.
+            A new instance must be initialised for each subsequent document that needs to be processed.
+            </summary>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Api.Ocr.Abort">
+            <summary>
+            Terminates processing.
+            </summary>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Api.Ocr.Recognize(Aquaforest.ExtendedOCR.Api.PreProcessor)">
+            <summary>
+            Call Recognize to perform the actual OCR once options have been set on the <see cref="T:Aquaforest.ExtendedOCR.Api.Ocr"/> and <see cref="T:Aquaforest.ExtendedOCR.Api.PreProcessor"/> objects.
+            </summary>
+            <param name="preProcessor">The pre-processing settings to apply.</param>
+            <returns>Whether OCR has been successful or not.</returns>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Api.Ocr.ReadBMPSource(System.String)">
+            <summary>
+            Read a bitmap source for OCR.
+            </summary>
+            <param name="sourcefile">The full path of the source BMP file.</param>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Api.Ocr.ReadBMPSource(System.IO.Stream)">
+            <summary>
+            Read a bitmap source from a <see cref="T:System.IO.Stream"/> for OCR.
+            </summary>
+            <param name="source">Source bitmap <see cref="T:System.IO.Stream"/></param>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Api.Ocr.ReadImageSource(System.Drawing.Image)">
+            <summary>
+            Reads an Image object checking the number of frames (pages).
+            </summary>
+            <param name="image">The image object to OCR.</param>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Api.Ocr.ReadJPEGSource(System.String)">
+            <summary>
+            The source JPEG file to OCR.
+            </summary>
+            <param name="sourcefile">The full path of the source JPEG file.</param>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Api.Ocr.ReadJPEGSource(System.IO.Stream)">
+            <summary>
+            Read a JPEG source from a <see cref="T:System.IO.Stream"/> for OCR.
+            </summary>
+            <param name="source">Source bitmap <see cref="T:System.IO.Stream"/></param>
+            <returns>Success</returns>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Api.Ocr.ReadPDFSource(System.String)">
+            <summary>
+            The source PDF file to OCR.
+            </summary>
+            <param name="sourcefile">The full path of the source PDF file.</param>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Api.Ocr.ReadPDFSource(System.IO.Stream)">
+            <summary>
+            Read a PDF source from a <see cref="T:System.IO.Stream"/> for OCR.
+            </summary>
+            <param name="source">Source PDF <see cref="T:System.IO.Stream"/></param>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Api.Ocr.ReadPDFSource(System.String,System.String)">
+            <summary>
+            The source PDF file to OCR
+            </summary>
+            <param name="sourcefile">The full path of the source PDF file.</param>
+            <param name="password">The password to use to open the source PDF file.</param>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Api.Ocr.ReadPDFSource(System.IO.Stream,System.String)">
+            <summary>
+            Read a password protected PDF source from a <see cref="T:System.IO.Stream"/> for OCR.
+            </summary>
+            <param name="source">Source PDF <see cref="T:System.IO.Stream"/></param>
+            <param name="password">The password to open the PDF.</param>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Api.Ocr.ReadTIFFSource(System.String)">
+            <summary>
+            The source TIFF file to OCR.
+            </summary>
+            <param name="sourcefile">The full path of the source TIFF file.</param>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Api.Ocr.ReadTIFFSource(System.IO.Stream)">
+            <summary>
+            Read a TIFF source from a <see cref="T:System.IO.Stream"/> for OCR.
+            </summary>
+            <param name="source">Source TIFF <see cref="T:System.IO.Stream"/></param>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Api.Ocr.SaveCSVOutput(System.String,System.Boolean)">
+            <summary>
+            Save CSV file to the specified output location.<para />
+            <b>Note:</b> This method should only be called if <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.EnableCsvOutput"/> is set to <see langword="true"/> prior to the call to <see cref="M:Aquaforest.ExtendedOCR.Api.Ocr.Recognize(Aquaforest.ExtendedOCR.Api.PreProcessor)"/>.
+            </summary>
+            <param name="outputfile">The name of the file to save the output as.</param>
+            <param name="overwriteExisting">Overwrite file with the same name.</param>
+            <returns>Whether save was successful or not.</returns>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Api.Ocr.SaveCSVOutput(System.IO.Stream@)">
+            <summary>
+            Save CSV output to a <see cref="T:System.IO.Stream"/>.<para />
+            <b>Note:</b> This method should only be called if <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.EnableCsvOutput"/> is set to <see langword="true"/> prior to the call to <see cref="M:Aquaforest.ExtendedOCR.Api.Ocr.Recognize(Aquaforest.ExtendedOCR.Api.PreProcessor)"/>.
+            </summary>
+            <param name="outputStream">The output <see cref="T:System.IO.Stream"/> containing the results of the OCR in CSV format.</param>
+            <returns>Whether save was successful or not.</returns>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Api.Ocr.SaveDOCXOutput(System.String,System.Boolean)">
+            <summary>
+            Save DOCX file to the specified output location.<para />
+            <b>Note:</b> This method should only be called if <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.EnableDocxOutput"/> is set to <see langword="true"/> prior to the call to <see cref="M:Aquaforest.ExtendedOCR.Api.Ocr.Recognize(Aquaforest.ExtendedOCR.Api.PreProcessor)"/>.
+            </summary>
+            <param name="outputfile">The name of the file to save the output as.</param>
+            <param name="overwriteExisting">Overwrite file with the same name.</param>
+            <returns>Whether save was successful or not.</returns>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Api.Ocr.SaveDOCXOutput(System.IO.Stream@)">
+            <summary>
+            Save DOCX output to a <see cref="T:System.IO.Stream"/>.<para />
+            <b>Note:</b> This method should only be called if <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.EnableDocxOutput"/> is set to <see langword="true"/> prior to the call to <see cref="M:Aquaforest.ExtendedOCR.Api.Ocr.Recognize(Aquaforest.ExtendedOCR.Api.PreProcessor)"/>.
+            </summary>
+            <param name="outputStream">The output <see cref="T:System.IO.Stream"/> containing the results of the OCR in DOCX format.</param>
+            <returns>Whether save was successful or not.</returns>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Api.Ocr.SaveEPUBOutput(System.String,System.Boolean)">
+            <summary>
+            Save EPUB file to the specified output location.<para />
+            <b>Note:</b> This method should only be called if <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.EnableEpubOutput"/> is set to <see langword="true"/> prior to the call to <see cref="M:Aquaforest.ExtendedOCR.Api.Ocr.Recognize(Aquaforest.ExtendedOCR.Api.PreProcessor)"/>.
+            </summary>
+            <param name="outputfile">The name of the file to save the output as.</param>
+            <param name="overwriteExisting">Overwrite file with the same name.</param>
+            <returns>Whether save was successful or not.</returns>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Api.Ocr.SaveEPUBOutput(System.IO.Stream@)">
+            <summary>
+            Save EPUB output to a <see cref="T:System.IO.Stream"/>.<para />
+            <b>Note:</b> This method should only be called if <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.EnableEpubOutput"/> is set to <see langword="true"/> prior to the call to <see cref="M:Aquaforest.ExtendedOCR.Api.Ocr.Recognize(Aquaforest.ExtendedOCR.Api.PreProcessor)"/>.
+            </summary>
+            <param name="outputStream">The output <see cref="T:System.IO.Stream"/> containing the results of the OCR in EPUB format.</param>
+            <returns>Whether save was successful or not.</returns>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Api.Ocr.SaveExcelMLOutput(System.String,System.Boolean)">
+            <summary>
+            Save Excel Markup Language file to the specified output location.<para />
+            <b>Note:</b> This method should only be called if <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.EnableExcelMlOutput"/> is set to <see langword="true"/> prior to the call to <see cref="M:Aquaforest.ExtendedOCR.Api.Ocr.Recognize(Aquaforest.ExtendedOCR.Api.PreProcessor)"/>.
+            </summary>
+            <param name="outputfile">The name of the file to save the output as.</param>
+            <param name="overwriteExisting">Overwrite file with the same name.</param>
+            <returns>Whether save was successful or not.</returns>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Api.Ocr.SaveExcelMLOutput(System.IO.Stream@)">
+            <summary>
+            Save Excel Markup Language output to a <see cref="T:System.IO.Stream"/>.<para />
+            <b>Note:</b> This method should only be called if <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.EnableExcelMlOutput"/> is set to <see langword="true"/> prior to the call to <see cref="M:Aquaforest.ExtendedOCR.Api.Ocr.Recognize(Aquaforest.ExtendedOCR.Api.PreProcessor)"/>.
+            </summary>
+            <param name="outputStream">The output <see cref="T:System.IO.Stream"/> containing the results of the OCR in Excel Markup Language format.</param>
+            <returns>Whether save was successful or not.</returns>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Api.Ocr.SaveHTMLOutput(System.String,System.Boolean)">
+            <summary>
+            Save HTML file to the specified location.<para />
+            <b>Note:</b> This method should only be called if <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.EnableHtmlOutput"/> is set to <see langword="true"/> prior to the call to <see cref="M:Aquaforest.ExtendedOCR.Api.Ocr.Recognize(Aquaforest.ExtendedOCR.Api.PreProcessor)"/>.
+            </summary>
+            <param name="outputfile">The name of the file to save the output as.</param>
+            <param name="overwriteExisting">Overwrite file with the same name.</param>
+            <returns>Whether save was successful or not.</returns>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Api.Ocr.SaveHTMLOutput(System.IO.Stream@)">
+            <summary>
+            Save HTML output to a <see cref="T:System.IO.Stream"/>.<para />
+            <b>Note:</b> This method should only be called if <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.EnableHtmlOutput"/> is set to <see langword="true"/> prior to the call to <see cref="M:Aquaforest.ExtendedOCR.Api.Ocr.Recognize(Aquaforest.ExtendedOCR.Api.PreProcessor)"/>.
+            </summary>
+            <param name="outputStream">The output <see cref="T:System.IO.Stream"/> containing the results of the OCR in HTML format.</param>
+            <returns>Whether save was successful or not.</returns>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Api.Ocr.SaveOpenDocumentTextOutput(System.String,System.Boolean)">
+            <summary>
+            Save Open Document Text file to the specified output location.<para />
+            <b>Note:</b> This method should only be called if <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.EnableOpenDocumentTextOutput"/> is set to <see langword="true"/> prior to the call to <see cref="M:Aquaforest.ExtendedOCR.Api.Ocr.Recognize(Aquaforest.ExtendedOCR.Api.PreProcessor)"/>.
+            </summary>
+            <param name="outputfile">The name of the file to save the output as.</param>
+            <param name="overwriteExisting">Overwrite file with the same name.</param>
+            <returns>Whether save was successful or not.</returns>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Api.Ocr.SaveOpenDocumentTextOutput(System.IO.Stream@)">
+            <summary>
+            Save ODT output to a <see cref="T:System.IO.Stream"/>.<para />
+            <b>Note:</b> This method should only be called if <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.EnableOpenDocumentTextOutput"/> is set to <see langword="true"/> prior to the call to <see cref="M:Aquaforest.ExtendedOCR.Api.Ocr.Recognize(Aquaforest.ExtendedOCR.Api.PreProcessor)"/>.
+            </summary>
+            <param name="outputStream">The output <see cref="T:System.IO.Stream"/> containing the results of the OCR in ODT format.</param>
+            <returns>Whether save was successful or not.</returns>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Api.Ocr.SavePDFOutput(System.String,System.Boolean)">
+            <summary>
+            Save PDF file to the specified output location.<para />
+            <b>Note:</b> This method should only be called if <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.EnablePdfOutput"/> is set to <see langword="true"/> prior to the call to <see cref="M:Aquaforest.ExtendedOCR.Api.Ocr.Recognize(Aquaforest.ExtendedOCR.Api.PreProcessor)"/>.
+            </summary>
+            <param name="outputfile">The name of the file to save the output as.</param>
+            <param name="overwriteExisting">Overwrite file with the same name.</param>
+            <returns>Whether save was successful or not.</returns>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Api.Ocr.SavePDFOutput(System.IO.Stream@)">
+            <summary>
+            Save PDF output to a <see cref="T:System.IO.Stream"/>.<para />
+            <b>Note:</b> This method should only be called if <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.EnablePdfOutput"/> is set to <see langword="true"/> prior to the call to <see cref="M:Aquaforest.ExtendedOCR.Api.Ocr.Recognize(Aquaforest.ExtendedOCR.Api.PreProcessor)"/>.
+            </summary>
+            <param name="outputStream">The output <see cref="T:System.IO.Stream"/> containing the results of the OCR in PDF format.</param>
+            <returns>Whether save was successful or not.</returns>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Api.Ocr.SaveRTFOutput(System.String,System.Boolean)">
+            <summary>
+            Save RTF file to the specified output location.<para />
+            <b>Note:</b> This method should only be called if <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.EnableRtfOutput"/> is set to <see langword="true"/> prior to the call to <see cref="M:Aquaforest.ExtendedOCR.Api.Ocr.Recognize(Aquaforest.ExtendedOCR.Api.PreProcessor)"/>.
+            </summary>
+            <param name="outputfile">The name of the file to save the output as.</param>
+            <param name="overwriteExisting">Overwrite file with the same name.</param>
+            <returns>Whether save was successful or not.</returns>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Api.Ocr.SaveRTFOutput(System.IO.Stream@)">
+            <summary>
+            Save RTF output to a <see cref="T:System.IO.Stream"/>.<para />
+            <b>Note:</b> This method should only be called if <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.EnableRtfOutput"/> is set to <see langword="true"/> prior to the call to <see cref="M:Aquaforest.ExtendedOCR.Api.Ocr.Recognize(Aquaforest.ExtendedOCR.Api.PreProcessor)"/>.
+            </summary>
+            <param name="outputStream">The output <see cref="T:System.IO.Stream"/> containing the results of the OCR in RTF format.</param>
+            <returns>Whether save was successful or not.</returns>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Api.Ocr.SaveTextOutput(System.String,System.Boolean)">
+            <summary>
+            Save Text file to the specified output location.<para />
+            <b>Note:</b> This method should only be called if <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.EnableTextOutput"/> is set to <see langword="true"/> prior to the call to <see cref="M:Aquaforest.ExtendedOCR.Api.Ocr.Recognize(Aquaforest.ExtendedOCR.Api.PreProcessor)"/>.
+            </summary>
+            <param name="outputfile">The name of the file to save the output as.</param>
+            <param name="overwriteExisting">Overwrite file with the same name.</param>
+            <returns>Whether save was successful or not.</returns>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Api.Ocr.SaveTextOutput(System.IO.Stream@)">
+            <summary>
+            Save TEXT output to a <see cref="T:System.IO.Stream"/>.<para />
+            <b>Note:</b> This method should only be called if <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.EnableTextOutput"/> is set to <see langword="true"/> prior to the call to <see cref="M:Aquaforest.ExtendedOCR.Api.Ocr.Recognize(Aquaforest.ExtendedOCR.Api.PreProcessor)"/>.
+            </summary>
+            <param name="outputStream">The output <see cref="T:System.IO.Stream"/> containing the results of the OCR in TEXT format.</param>
+            <returns>Whether save was successful or not.</returns>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Api.Ocr.SaveWordMLOutput(System.String,System.Boolean)">
+            <summary>
+            Save Word Markup Language file to the specified output location.<para />
+            <b>Note:</b> This method should only be called if <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.EnableWordMlOutput"/> is set to <see langword="true"/> prior to the call to <see cref="M:Aquaforest.ExtendedOCR.Api.Ocr.Recognize(Aquaforest.ExtendedOCR.Api.PreProcessor)"/>.
+            </summary>
+            <param name="outputfile">The name of the file to save the output as.</param>
+            <param name="overwriteExisting">Overwrite file with the same name.</param>
+            <returns>Whether save was successful or not.</returns>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Api.Ocr.SaveWordMLOutput(System.IO.Stream@)">
+            <summary>
+            Save Word Markup Language output to a <see cref="T:System.IO.Stream"/>.<para />
+            <b>Note:</b> This method should only be called if <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.EnableWordMlOutput"/> is set to <see langword="true"/> prior to the call to <see cref="M:Aquaforest.ExtendedOCR.Api.Ocr.Recognize(Aquaforest.ExtendedOCR.Api.PreProcessor)"/>.
+            </summary>
+            <param name="outputStream">The output <see cref="T:System.IO.Stream"/> containing the results of the OCR in Word Markup Language format.</param>
+            <returns>Whether save was successful or not.</returns>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Api.Ocr.SaveXLSXOutput(System.String,System.Boolean)">
+            <summary>
+            Save XLSX file to the specified output location.<para />
+            <b>Note:</b> This method should only be called if <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.EnableXlsxOutput"/> is set to <see langword="true"/> prior to the call to <see cref="M:Aquaforest.ExtendedOCR.Api.Ocr.Recognize(Aquaforest.ExtendedOCR.Api.PreProcessor)"/>.
+            </summary>
+            <param name="outputfile">The name of the file to save the output as.</param>
+            <param name="overwriteExisting">Overwrite file with the same name.</param>
+            <returns>Whether save was successful or not.</returns>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Api.Ocr.SaveXLSXOutput(System.IO.Stream@)">
+            <summary>
+            Save XLSX output to a <see cref="T:System.IO.Stream"/>.<para />
+            <b>Note:</b> This method should only be called if <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.EnableXlsxOutput"/> is set to <see langword="true"/> prior to the call to <see cref="M:Aquaforest.ExtendedOCR.Api.Ocr.Recognize(Aquaforest.ExtendedOCR.Api.PreProcessor)"/>.
+            </summary>
+            <param name="outputStream">The output <see cref="T:System.IO.Stream"/> containing the results of the OCR in XLSX format.</param>
+            <returns>Whether save was successful or not.</returns>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Api.Ocr.SaveXPSOutput(System.String,System.Boolean)">
+            <summary>
+            Save XPS file to the specified output location.<para />
+            <b>Note:</b> This method should only be called if <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.EnableXpsOutput"/> is set to <see langword="true"/> prior to the call to <see cref="M:Aquaforest.ExtendedOCR.Api.Ocr.Recognize(Aquaforest.ExtendedOCR.Api.PreProcessor)"/>.
+            </summary>
+            <param name="outputfile">The name of the file to save the output as.</param>
+            <param name="overwriteExisting">Overwrite file with the same name.</param>
+            <returns>Whether successful or not.</returns>pu
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Api.Ocr.SaveXPSOutput(System.IO.Stream@)">
+            <summary>
+            Save XPS output to a <see cref="T:System.IO.Stream"/>.<para />
+            <b>Note:</b> This method should only be called if <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.EnableXpsOutput"/> is set to <see langword="true"/> prior to the call to <see cref="M:Aquaforest.ExtendedOCR.Api.Ocr.Recognize(Aquaforest.ExtendedOCR.Api.PreProcessor)"/>.
+            </summary>
+            <param name="outputStream">The output <see cref="T:System.IO.Stream"/> containing the results of the OCR in XPS format.</param>
+            <returns>Whether save was successful or not.</returns>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Api.Ocr.ReadDocumentString">
+            <summary>
+            Returns a string containing the words from all pages processed.
+            </summary>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Api.Ocr.ReadPageString(System.Int32)">
+            <summary>
+            This method will retrieve a string representing the words found for the page requested. <para />
+            <b>Note:</b> This should be called only after OCR has completed successfully for the page.
+            </summary>
+            <param name="pageNumber">The page number of the page to get the string from.</param>
+            <returns>The string containing the words from the specified page.</returns>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Api.Ocr.ReadPageString(System.Int32,System.Drawing.Rectangle)">
+            <summary>
+            This method will retrieve a string representing the words found for the page requested and in the region specified. <para />
+            <b>Note:</b> This should be called only after OCR has completed successfully for the page.
+            </summary>
+            <param name="pageNumber">The page number of the page to get the string from.</param>
+            <param name="region">Region to retrieve string from.</param>
+            <returns>The string containing the words from the specified region and page.</returns>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Api.Ocr.ReadPageWords(System.Int32)">
+            <summary>
+            Returns a <see cref="T:Aquaforest.ExtendedOCR.Shared.Words"/> object representing the words recognised for the page requested. <para />
+            <b>Note:</b> This should be called only after OCR has completed successfully for the page.
+            </summary>
+            <param name="pageNumber">The page number of the page to get the words from.</param>
+            <returns><see cref="T:Aquaforest.ExtendedOCR.Shared.Words"/> object representing the words recognised for the page requested.</returns>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Api.Ocr.ReadPageWords(System.Int32,System.Drawing.Rectangle)">
+            <summary>
+            Returns a <see cref="T:Aquaforest.ExtendedOCR.Shared.Words"/> object representing the words recognised for the page requested and in the region specified. <para />
+            <b>Note:</b> This should be called only after OCR has completed successfully for the page.
+            </summary>
+            <param name="pageNumber">The page number of the page to get the words from.</param>
+            <param name="region">Region to retrieve words from.</param>
+            <returns><see cref="T:Aquaforest.ExtendedOCR.Shared.Words"/> object representing the words recognised for the specified region and page.</returns>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Api.Ocr.ReadPageLines(System.Int32)">
+            <summary>
+            Returns a list of <see cref="T:Aquaforest.ExtendedOCR.Shared.LineData"/> objects, where each object represents a line of recognized text for the page requested.<para />
+            <b>Note:</b> This should be called only after OCR has completed successfully for the page.
+            </summary>
+            <param name="pageNumber">The page number of the page to get the lines from.</param>
+            <returns>A list of <see cref="T:Aquaforest.ExtendedOCR.Shared.LineData"/> object representing the lines recognised for the page requested.</returns>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Api.Ocr.GetPageImage(System.Int32)">
+            <summary>
+            Retrieves the image for the specified page. <para />
+            <b>Note:</b> Make sure that you call this method before deleting temporary files.
+            </summary>
+            <param name="pageNumber">The page to retrieve the image from.</param>
+            <returns>The image for the specified page.</returns>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Api.Ocr.GetPageConfidence(System.Int32)">
+            <summary>
+            Retrieves the confidence score of the specified page. <para />
+            <b>Note: </b> <see cref="M:Aquaforest.ExtendedOCR.Api.Ocr.GetPageConfidence(System.Int32)"/> must be set to <see langword="true"/> to get the confidence score.
+            </summary>
+            <param name="pageNumber">The page for which to get the confidence score.</param>
+            <returns>The confidence score. The confidence score ranges from 0 (best confidence) to 255 (worst confidence).</returns>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Api.Ocr.DeleteTemporaryFiles">
+            <summary>
+            Delete temporary files used in the OCR processing
+            </summary>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Api.Ocr.Dispose">
+            <summary>
+            Dispose Ocr resources.
+            </summary>
+        </member>
+        <member name="T:Aquaforest.ExtendedOCR.Api.LicenseInfo">
+            <summary>
+            This class provides information about your license.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.LicenseInfo.ArabicOCREnabled">
+            <summary>
+            Get whether Arabic OCR is enabled.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.LicenseInfo.AsianOCREnabled">
+            <summary>
+            Get whether Asian OCR is enabled.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.LicenseInfo.HebrewOCREnabled">
+            <summary>
+            Get whether Hebrew OCR is enabled.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.LicenseInfo.IHQCEnabled">
+            <summary>
+            Get whether Intelligent High Quality Compression (IHQC) is enabled.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.LicenseInfo.IsTrial">
+            <summary>
+            Get whether the license is trial.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.LicenseInfo.LicenseType">
+            <summary>
+            Get the license type: Basic, Standard, Advanced or Extended.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.LicenseInfo.Threads">
+            <summary>
+            Get the maximum number of threads allowed to run concurrently.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.LicenseInfo.SDKVersion">
+            <summary>
+            Get the version of the SDK that this license is for.
+            </summary>
+        </member>
+        <member name="T:Aquaforest.ExtendedOCR.Api.PreProcessor">
+            <summary>
+            Class containing properties and settings that can be applied to each page image to improve OCR.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.PreProcessor.AdvancedDeskew">
+            <summary>
+            Set advanced deskew settings.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.PreProcessor.AdvancedDespeckle">
+            <summary>
+            Set advanced despeckle settings.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.PreProcessor.Autorotate">
+            <summary>
+            When set to <see langword="true"/>, it will automatically rotate pages so that text flows from left to right.
+            The default value is <see langword="false"/>.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.PreProcessor.Binarization">
+            <summary>
+            Set the various binarization settings.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.PreProcessor.BlankPageRemoval">
+            <summary>
+            Set blank page removal settings.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.PreProcessor.Deskew">
+            <summary>
+            Used to straighten the image. Deskew handles images skewed up to 10 degrees. It doesn't handle higher skew angles.
+            The default value is <see langword="false"/>.
+            <para/>
+            Advanced deskew settings can be set through <see cref="P:Aquaforest.ExtendedOCR.Api.PreProcessor.AdvancedDeskew"/>.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.PreProcessor.Despeckle">
+            <summary>
+            Removes specks below the specified pixel size from the image.
+            The default value is 0 and the maximum value is 20.
+            <para />
+            Advanced despeckle settings can be set through <see cref="P:Aquaforest.ExtendedOCR.Api.PreProcessor.AdvancedDespeckle"/>.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.PreProcessor.ForceTableZones">
+            <summary>
+            Setting this property to <see langword="true"/> can improve CSV and XLSX output.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.PreProcessor.Interpolation">
+            <summary>
+            Set the interpolation settings.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.PreProcessor.KeepOriginalImage">
+            <summary>
+            Set this to <see langword="true"/> if you want to use the pre-processed image for OCR but keep the original image in the output document.
+            Default value is <see langword="true"/>.
+            <para>
+            <b>Note: </b> This property only applies when processing image files or when processing PDF files with <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.ExtractImageMethod"/> set to <see cref="F:Aquaforest.ExtendedOCR.Api.ExtractImageMethod.ConvertToTiff"/>
+            </para>
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.PreProcessor.KeepDeskew">
+            <summary>
+            Set this to <see langword="true"/> if you want to use the deskewed image in the output document.
+            <para>
+            <b>Note: </b> This property only applies when processing image files or when processing PDF files with <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.ExtractImageMethod"/> set to <see cref="F:Aquaforest.ExtendedOCR.Api.ExtractImageMethod.ConvertToTiff"/>
+            </para>
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.PreProcessor.KeepDespeckle">
+            <summary>
+            Set this to <see langword="true"/> if you want to use the despeckled image in the output document. This requires the source image to be black and white.
+            <para>
+            <b>Note: </b> This property only applies when processing image files or when processing PDF files with <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.ExtractImageMethod"/> set to <see cref="F:Aquaforest.ExtendedOCR.Api.ExtractImageMethod.ConvertToTiff"/>
+            </para>
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.PreProcessor.KeepDarkBorderRemoval">
+            <summary>
+            Set this to <see langword="true"/> if you want to use the image after dark borders have been removed in the output document.
+            <para>
+            <b>Note: </b> This property only applies when processing image files or when processing PDF files with <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.ExtractImageMethod"/> set to <see cref="F:Aquaforest.ExtendedOCR.Api.ExtractImageMethod.ConvertToTiff"/>
+            </para>
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.PreProcessor.KeepPunchHoleRemoval">
+            <summary>
+            Set this to <see langword="true"/> if you want to use the image after punch holes have been removed in the output document.
+            <para>
+            <b>Note: </b> This property only applies when processing image files or when processing PDF files with <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.ExtractImageMethod"/> set to <see cref="F:Aquaforest.ExtendedOCR.Api.ExtractImageMethod.ConvertToTiff"/>
+            </para>
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.PreProcessor.LineRemoval">
+            <summary>
+            Set the various line removal settings.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.PreProcessor.NonImagePDF">
+            <summary>
+            This  allows  control  over  the  treatment  of  non  image-only
+            PDFs, i.e. PDFs that have some text in them as well as images.
+            The default value for this setting is 'OCR'.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.PreProcessor.PdfToImageBpp">
+            <summary>
+            The Bits Per Pixel to use for the rasterized PDF page when using engine 1. This only applies for documents that are not processed using Native mode.<para />
+            The default value for this property is taken from the PDF page.<para />
+            <b>Note:</b> This should only be set with guidance from technical support.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.PreProcessor.PdfToImageCompression">
+            <summary>
+            The compression to set to the images generated or rasterized from each page of the source PDF file.
+            These images are then OCRed to create the searchable PDF.<para />
+            The default value for this property is taken from each page in the source PDF file.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.PreProcessor.PdfToImageDpi">
+            <summary>
+            The DPI to set to the images rasterized from each page of the source PDF file.
+            These images are then OCRed to create the searchable PDF.<para />
+            The default value for this property is taken from each page in the source PDF file.<br/>
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.PreProcessor.PdfToImageForceVectorCheck">
+            <summary>
+            This setting is useful when dealing with documents that contains vector objects (e.g. CAD drawings). <para />
+            By default, pages that contain only vector objects are rasterized. Pages that do not have any images but contain vector objects as well as electronic text are skipped from rasterization.
+            However, sometimes there can be a page that contains vector objects (CAD drawings) but its title may be in electronic text. To force rasterizing pages like these, set this property to <see langword="true"/>.<br/>
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.PreProcessor.PdfToImageIncludeText">
+            <summary>
+            When set to <see langword="false"/> this will prevent the conversion of real text (i.e. electronically generated as opposed to text that is part of a scanned image)
+            from being rendered in the page images extracted from the PDF. This is because the text is already searchable and so generally does not require OCR.
+            The value can be set to <see langword="true"/> however if the OCR is required on this real text.<br/>
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.PreProcessor.PdfToImageMaxRes">
+            <summary>
+            The maximum resolution of the rasterized images. If the resolution retrieved from the PDF page is bigger than this value, it will be set to this value.
+            The default value for this property is 600.<br/>
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.PreProcessor.PdfToImageMinRes">
+            <summary>
+            The minimum resolution of the rasterized images. If the resolution retrieved from the PDF page is lower than this value, it will be set to this value.
+            The default value for this property is 200.<br/>
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.PreProcessor.RemoveDarkBorders">
+            <summary>
+            Removes the dark surrounding from bi-tonal, gray-scale or color images.
+            The dark surrounding of the image is whitened. <para />
+            <b>Note: </b>The dark border should be touching the edge of the image/page for this to work.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.PreProcessor.RemovePunchHoles">
+            <summary>
+            Attempts to remove punch holes from pages. <para />
+            <b>Note: </b>The punch hole algorithm can be used on images with the following minimum dimensions width: 300px, height: 100px (computed for 300 DPI). The minimum height and width can vary with the image resolution.
+            </summary>
+        </member>
+        <member name="T:Aquaforest.ExtendedOCR.Api.AdvancedDespeckle">
+            <summary>
+            The AdvancedDespeckle class provides advanced image noise reduction features by the image despeckle filter.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.AdvancedDespeckle.RemoveWhitePixels">
+            <summary>
+            By default, <see cref="T:Aquaforest.ExtendedOCR.Api.AdvancedDespeckle"/> removes black pixels. If this setting is set to <see langword="true"/>,
+            white pixels will be removed instead of black pixels.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.AdvancedDespeckle.SpeckleSize">
+            <summary>
+            The size of speckles to remove (in pixels). The size of the pixels to remove must be less than 20 pixels.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.AdvancedDespeckle.Dilate">
+            <summary>
+            Despeckle removes all the groups of connected pixels with a number of pixels below the <see cref="P:Aquaforest.ExtendedOCR.Api.AdvancedDespeckle.SpeckleSize"/> parameter.
+            Those connected pixels are not removed if the distance to a larger connected component is below this parameter.
+            As a result only the isolated pixels get deleted. Maximum value for this property is 20 pixels.
+            <para/>
+            The default value is '0'.
+            </summary>
+        </member>
+        <member name="T:Aquaforest.ExtendedOCR.Api.Binarization">
+            <summary>
+            The Binarization class offers image binarization features. Binarization is the first stage in image recognition. It converts the input image into a black and white image for faster processing.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Binarization.Binarize">
+            <summary>
+            Whether or not to perform binarization on the document.
+            The default value is <see langword="true"/>.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Binarization.Brightness">
+            <summary>
+            The brightness threshold (higher values will darker the result). <para />
+            Enhances the image by increasing/decreasing the luminosity of the image.<para />
+            The default value is 0.<para />
+            <b>Note:</b> For this setting to work, <see cref="P:Aquaforest.ExtendedOCR.Api.Binarization.Binarize"/> needs to be set to <see langword="true"/>.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Binarization.Contrast">
+            <summary>
+            The contrast threshold (lower values will darker the result). <para />
+            Enhances the image by increasing/decreasing the difference between image elements and their background.<para />
+            The default value is 40.<para />
+            <b>Note:</b> For this setting to work, <see cref="P:Aquaforest.ExtendedOCR.Api.Binarization.Binarize"/> needs to be set to <see langword="true"/>.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Binarization.SmoothingLevel">
+            <summary>
+            Smoothing may be useful to binarize text with a colored background in order to avoid noisy pixels.
+            (0 disables smoothing, higher values smooths more).
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Binarization.Threshold">
+            <summary>
+            Sets the threshold for fixed threshold binarization (0 for automatic threshold computation). The default value is 0.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Binarization.Undithering">
+            <summary>
+            Whether or not to use automatic undithering while processing a page. NOTE: Automatic undithering will be applied only if smoothing is also activated (<see cref="P:Aquaforest.ExtendedOCR.Api.Binarization.SmoothingLevel"/>)<para />
+            Dithering is a scanning technique which consists in representing a color or greyscale image using only a limited color palette. This allows to reduce file size while maintaining the general aspect of the image. This technique is known to create images more difficult to handle for OCR technology; this is why specific image preprocessing is needed to detect and revert it.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Binarization.BinarizationMode">
+            <summary>
+            The binarization algorithm to use.<para/>
+            Computes a black and white image with the input color/gray-scale image by using the smoothing, brightness, contrast levels and the threshold (for Threshold binarization only) stored in the instance of this class.
+            </summary>
+        </member>
+        <member name="T:Aquaforest.ExtendedOCR.Api.BlankPageRemoval">
+            <summary>
+            This class offers blank page detection and removal features.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.BlankPageRemoval.DetectBlankPage">
+            <summary>
+            Detect blank pages in the source document. The default is <see langword="true"/>.<para/>
+            <b>Note:</b> This will not remove the blank pages detected. To remove blank pages set <see cref="P:Aquaforest.ExtendedOCR.Api.BlankPageRemoval.RemoveBlankPage"/> to <see langword="true"/> and <see cref="T:Aquaforest.ExtendedOCR.Api.ExtractImageMethod"/> to <see cref="F:Aquaforest.ExtendedOCR.Api.ExtractImageMethod.ConvertToTiff"/>.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.BlankPageRemoval.RemoveBlankPage">
+            <summary>
+            Remove blank pages from the output document. <b>Note:</b> You also need to set <see cref="T:Aquaforest.ExtendedOCR.Api.ExtractImageMethod"/> to <see cref="F:Aquaforest.ExtendedOCR.Api.ExtractImageMethod.ConvertToTiff"/>.
+            The default value is <see langword="false"/>.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.BlankPageRemoval.Sensitivity">
+            <summary>
+            The sensitivity (1 -100) for blank page detection. With high sensitivity, less blank pages are detected.
+            Default value is 1.
+            </summary>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Api.BlankPageRemoval.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Aquaforest.ExtendedOCR.Api.BlankPageRemoval"/> class.
+            </summary>
+        </member>
+        <member name="T:Aquaforest.ExtendedOCR.Api.Interpolation">
+            <summary>
+            This class offers image interpolation features.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Interpolation.Interpolate">
+            <summary>
+            Whether or not to interpolate. Default is <see langword="false"/>.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Interpolation.InterpolationMode">
+            <summary>
+            Set the interpolation mode. Default is 'Normal'.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.Interpolation.TargetResolution">
+            <summary>
+            Interpolates the source image to the given resolution.
+            This value must be greater than the source image's resolution.
+            </summary>
+        </member>
+        <member name="T:Aquaforest.ExtendedOCR.Api.LineRemoval">
+            <summary>
+            LineRemoval class provides line removal capabilities. The class contains algorithms for removing vertical and horizontal lines in an image.
+            The integrator can control various settings in line removal algorithm like: <br/>
+            <ul>
+            <li>minimum and maximum line length and thickness of horizontal lines</li>
+            <li>minimum and maximum line length and thickness of vertical lines</li>
+            <li>clean noisy pixels adjacent to the line</li>
+            <li>maximum gap between the lines</li>
+            </ul>
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.LineRemoval.HorizontalCleanX">
+            <summary>
+            Cleans noisy pixels attached to horizontal lines. The default value is 1.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.LineRemoval.HorizontalCleanY">
+            <summary>
+            Cleans noisy pixels attached to horizontal lines. The default value is 1.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.LineRemoval.HorizontalDilate">
+            <summary>
+            Helps with the detection of horizontal lines. The default value is 1.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.LineRemoval.HorizontalMaxGap">
+            <summary>
+            The maximum horizontal line gap to close. It is useful to remove broken lines. The default value is 2.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.LineRemoval.HorizontalMaxThickness">
+            <summary>
+            The maximum thickness of horizontal lines to remove. It is useful to keep vertical lines
+            larger than this parameter. Can also be useful to keep vertical letter strokes. The default value is 16.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.LineRemoval.HorizontalMinLength">
+            <summary>
+            The minimum length of horizontal lines to remove. The default value is 128.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.LineRemoval.RemoveLines">
+            <summary>
+            Whether or not to remove lines from an image.
+            The default value is <see langword="true"/>.<para/>
+            <b>Note:</b> The image must be black and white for this setting to work. If you want to use
+            this setting on a color image then you have to set <see cref="P:Aquaforest.ExtendedOCR.Api.Binarization.Binarize"/> to <see langword="true"/>.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.LineRemoval.VerticalCleanX">
+            <summary>
+            Cleans noisy pixels attached to vertical lines. The default value is 1.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.LineRemoval.VerticalCleanY">
+            <summary>
+            Cleans noisy pixels attached to vertical lines. The default value is 1.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.LineRemoval.VerticalDilate">
+            <summary>
+            Helps with the detection of vertical lines. The default value is 1.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.LineRemoval.VerticalMaxGap">
+            <summary>
+            The maximum vertical line gap to close. It is useful to remove broken lines. The default value is 2.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.LineRemoval.VerticalMaxThickness">
+            <summary>
+            The maximum thickness of vertical lines to remove. It is useful to keep horizontal lines
+            larger than this parameter. Can also be useful to keep horizontal letter strokes. The default value is 16.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.LineRemoval.VerticalMinLength">
+            <summary>
+            The minimum length of vertical lines to remove. The default value is 128.
+            </summary>
+        </member>
+        <member name="T:Aquaforest.ExtendedOCR.Api.IHQCCompression">
+            <summary>
+            This class manages the intelligent High Quality Compression parameters for PDF(<see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.EnablePdfOutput"/>=<see langword="true"/>) and XPS (<see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.EnableXpsOutput"/>=<see langword="true"/>) output formats.<para/>
+            <b>Note: </b> IHQCCompression cannot be used when OCRing PDF in Native mode with <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.EnablePdfOutput"/> set to <see langword="true"/>.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.IHQCCompression.AdvancedBrightness">
+            <summary>
+            Contact technical support (<a href="mailto:support@aquaforest.com">support@aquaforest.com</a>) for guidance on using this property.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.IHQCCompression.AdvancedContrast">
+            <summary>
+            Contact technical support (<a href="mailto:support@aquaforest.com">support@aquaforest.com</a>) for guidance on using this property.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.IHQCCompression.AdvancedFactorPhoto">
+            <summary>
+            Contact technical support (<a href="mailto:support@aquaforest.com">support@aquaforest.com</a>) for guidance on using this property.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.IHQCCompression.AdvancedSmooth">
+            <summary>
+            Contact technical support (<a href="mailto:support@aquaforest.com">support@aquaforest.com</a>) for guidance on using this property.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.IHQCCompression.AutoAdjust">
+            <summary>
+            Contact technical support (<a href="mailto:support@aquaforest.com">support@aquaforest.com</a>) for guidance on using this property.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.IHQCCompression.EnableIHQCCompression">
+            <summary>
+            Apply Intelligent High Quality Compression.
+            The default value is <see langword="false"/>.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.IHQCCompression.HighResolutionForeground">
+            <summary>
+            High resolution foreground feature enables a specific mode causing the use of high resolution for the foreground image.
+            HighResolutionForeground enables a specific mode for working around a bug existing in the native readers of some platforms that
+            does not read properly PDF (Mainly the native reader on MAC OS X and IOS). Those native readers do not follow some of the
+            specification of the PDF format. In place of displaying the correct compressed image, they display a down-sampled version of it.
+            This special high resolution foreground mode offers a workaround to customer who wants to use iHQC with these buggy applications.
+            Most of the PDF readers, including Adobe Reader are able to read PDF with IHQC compression properly on any platform.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.IHQCCompression.IHQCCompressionLevel">
+            <summary>
+            The  compression  level  to  be  used.  Level  1  is  the  basic  compression level.
+            Level  3  is  the  most  advanced  intelligent  High  Quality Compression mode. <para/>
+            <b>Note: </b> PDF 1.4 A-1a and PDF 1.4 A-1b only supports level 1.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.IHQCCompression.IHQCQualityFactor">
+            <summary>
+            Set the IHQC quality factor.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.IHQCCompression.IHQCThreshold">
+            <summary>
+            Contact technical support (<a href="mailto:support@aquaforest.com">support@aquaforest.com</a>) for guidance on using this property.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.IHQCCompression.MinOutputResolution">
+            <summary>
+            Contact technical support (<a href="mailto:support@aquaforest.com">support@aquaforest.com</a>) for guidance on using this property.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.IHQCCompression.SegmentationMode">
+            <summary>
+            Contact technical support (<a href="mailto:support@aquaforest.com">support@aquaforest.com</a>) for guidance on using this property.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.IHQCCompression.Smoothing">
+            <summary>
+            Contact technical support (<a href="mailto:support@aquaforest.com">support@aquaforest.com</a>) for guidance on using this property.
+            </summary>
+        </member>
+        <member name="T:Aquaforest.ExtendedOCR.Api.PDFImageCompression">
+            <summary>
+            This class manages the PDF image compression parameters
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.PDFImageCompression.EnableJpeg2000Compression">
+            <summary>
+            Use JPEG 2000 compression. If set to <see langword="true"/>, then the default compression mode is <see cref="F:Aquaforest.ExtendedOCR.Api.Jpeg2000CompressionMode.JPEG2000_QUALITY_FACTOR"/>.
+            The default value is <see langword="false"/>.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.PDFImageCompression.Jpeg2000CompressionMode">
+            <summary>
+            The JPEG 2000 compression mode to use.<br/>
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.PDFImageCompression.Jpeg2000CompressionValue">
+            <summary>
+            The value to use for the selected compression mode.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.PDFImageCompression.QualityFactor">
+            <summary>
+            Gets/Sets the image compression quality factor of color JPEG images in generated PDFs. The default value is 192.<para/>
+            The quality factor determines the degree of loss caused by the compression process. Extended OCR accepts a value from 0 to 255:<para/>
+            <ul>
+            <li>255 guarantees the highest image quality</li>
+            <li>0 guarantees the best compression</li>
+            </ul>
+            </summary>
+        </member>
+        <member name="T:Aquaforest.ExtendedOCR.Api.AdvancedDeskew">
+            <summary>
+            Use this to defined advanced deskew properties.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.AdvancedDeskew.AdjustmentMode">
+            <summary>
+            Set the behavior regarding dimension adjustment for deskew operation.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Api.AdvancedDeskew.ForceDeskew">
+            <summary>
+            Under certain circumstances, rotating the image to correct its skew angle may decrease the OCR accuracy.
+            The extended engine is able to analyse the image and detect from a OCR accuracy point of view whether it's better to rotate the image or not.
+            Because the skew angle may be visible in the output document (e.g. if <see cref="P:Aquaforest.ExtendedOCR.Api.PreProcessor.KeepDeskew"/> is set to <see langword="true"/>), you can choose to force the deskew to rotate the image, even if it affects the accuracy.
+            <para/>
+            If turned off, the image is analyzed before rotation and the engine may choose not to rotate the image depending on the analysis result.
+            <para/>
+            If turned on, the image is rotated to correct skew angle.
+            </summary>
+        </member>
+    </members>
+</doc>

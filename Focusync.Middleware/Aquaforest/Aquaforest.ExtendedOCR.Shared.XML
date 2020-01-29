@@ -1,0 +1,417 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Aquaforest.ExtendedOCR.Shared</name>
+    </assembly>
+    <members>
+        <member name="T:Aquaforest.ExtendedOCR.Shared.CharacterData">
+            <summary>
+            Contains information describing a single blob extracted from the Extended OCR engine.
+            In most cases a blob represents a character. However there are cases where a blob can represent a group of characters.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Shared.CharacterData.Baseline">
+            <summary>
+            The baseline of the blob in the image (pixels).
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Shared.CharacterData.Bottom">
+            <summary>
+            Gets the Y-coordinate of the bottom edge of the character in pixels.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Shared.CharacterData.Character">
+            <summary>
+            Gets the string representation of the blob. In most cases a blob represents a character.
+            However there are cases where a blob can represent a group of characters.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Shared.CharacterData.Height">
+            <summary>
+            Gets the height of the character in pixels.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Shared.CharacterData.Width">
+            <summary>
+            Gets the width of the character in pixels.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Shared.CharacterData.Right">
+            <summary>
+            Gets the X-coordinate of the right edge of the character in pixels.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Shared.CharacterData.Left">
+            <summary>
+            Gets the X-coordinate of the left edge of the character in pixels.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Shared.CharacterData.X">
+            <summary>
+            Gets the X-coordinate of the left edge of the character in pixels.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Shared.CharacterData.Top">
+            <summary>
+            Gets the Y-coordinate of the top edge of the character in pixels.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Shared.CharacterData.Y">
+            <summary>
+            Gets the Y-coordinate of the top edge of the character in pixels.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Shared.CharacterData.AdvancedCharacterData">
+            <summary>
+            This property contains advanced information about the blob.<para />
+            <b>Note: </b> <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.GetAdvancedOCRData"/> must be set to <see langword="true"/> to access this property.
+            </summary>
+        </member>
+        <member name="T:Aquaforest.ExtendedOCR.Shared.AdvancedCharacterData">
+            <summary>
+            This class contains advanced information about each recognised blob (character).<para />
+            <b>Note: </b> <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.GetAdvancedOCRData"/> must be set to <see langword="true"/> to access the properties in this class.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Shared.AdvancedCharacterData.ConfidenceScore">
+            <summary>
+            The confidence score of the recognised blob (character) as computed by the OCR engine. The confidence score ranges from 0 (best confidence) to 255 (worst confidence).
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Shared.AdvancedCharacterData.IsBold">
+            <summary>
+             Is the blob bold?
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Shared.AdvancedCharacterData.IsItalic">
+            <summary>
+             Is the blob italic?
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Shared.AdvancedCharacterData.IsSubscript">
+            <summary>
+             Is the blob subscript?
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Shared.AdvancedCharacterData.IsSuperscript">
+            <summary>
+            Is the blob superscript?
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Shared.AdvancedCharacterData.ForegroundColor">
+            <summary>
+            The foreground color.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Shared.AdvancedCharacterData.BackgroundColor">
+            <summary>
+            The background color.
+            </summary>
+        </member>
+        <member name="T:Aquaforest.ExtendedOCR.Shared.LanguageCandidate">
+            <summary>
+            Class that contains information about identfied languages when <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.LanguageDetection"/> is enabled.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Shared.LanguageCandidate.LanguageId">
+            <summary>
+            The ID of one of the detected languages. Cast to <see cref="T:Aquaforest.ExtendedOCR.Api.SupportedLanguages"/> to get the language.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Shared.LanguageCandidate.ConfidenceLevel">
+            <summary>
+            The confidence level of the detected language (lower values are better). A confidence level of 255 is used to indicate that the detection could not succeed in finding a relevant candidate.
+            </summary>
+        </member>
+        <member name="T:Aquaforest.ExtendedOCR.Shared.LineData">
+            <summary>
+            Describes a single line after OCR as a list of <see cref="T:Aquaforest.ExtendedOCR.Shared.WordData"/> objects.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Shared.LineData.Words">
+            <summary>
+            Gets the list of words in the line.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Shared.LineData.Bottom">
+            <summary>
+            Gets the Y-coordinate of the bottom edge of the line in pixels.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Shared.LineData.Height">
+            <summary>
+            Gets the height of the word in pixels.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Shared.LineData.Left">
+            <summary>
+            Gets the X-coordinate of the left edge of the word in pixels.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Shared.LineData.Right">
+            <summary>
+            Gets the X-coordinate of the right edge of the word in pixels.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Shared.LineData.Top">
+            <summary>
+            Gets the Y-coordinate of the top edge of the word in pixels.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Shared.LineData.Width">
+            <summary>
+            Gets the width of the word in pixels.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Shared.LineData.LineWords">
+            <summary>
+            Gets the string representation of all the words in the line.
+            </summary>
+        </member>
+        <member name="T:Aquaforest.ExtendedOCR.Shared.StatusUpdateEventArgs">
+            <summary>
+            Provides information about each page after it has been OCRed.
+            </summary>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Shared.StatusUpdateEventArgs.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Aquaforest.ExtendedOCR.Shared.StatusUpdateEventArgs"/> class.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Shared.StatusUpdateEventArgs.BlankPage">
+            <summary>
+            Indicates whether the page was detected as blank.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Shared.StatusUpdateEventArgs.ImageAvailable">
+            <summary>
+            Indicates whether an image was successfully extracted (after applying all the appropriate pre-processing settings).
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Shared.StatusUpdateEventArgs.PageNumber">
+            <summary>
+            Returns page number for which this page relates to.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Shared.StatusUpdateEventArgs.Rotation">
+            <summary>
+            The rotation in degrees (°) of the current page.
+            If Autorotate is set to false this will always be 0.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Shared.StatusUpdateEventArgs.TextAvailable">
+            <summary>
+            Indicates whether text was extracted for the page.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Shared.StatusUpdateEventArgs.DetectedLanguages">
+            <summary>
+            Returns a list of detected languages when <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.LanguageDetection"/> is enabled.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Shared.StatusUpdateEventArgs.Resolution">
+            <summary>
+            The resolution of the page (DPI).
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Shared.StatusUpdateEventArgs.Width">
+            <summary>
+            The width of the page in pixels.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Shared.StatusUpdateEventArgs.Height">
+            <summary>
+            The height of the page in pixels.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Shared.StatusUpdateEventArgs.PageLines">
+            <summary>
+            Gets a list of recognised lines of text for the page.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Shared.StatusUpdateEventArgs.ConfidenceScore">
+            <summary>
+            The average confidence score of the OCR for the page. The confidence score ranges from 0 (best confidence) to 255 (worst confidence). <para />
+            <b>Note: </b> <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.GetAdvancedOCRData"/> must be set to <see langword="true"/> to get the confidence score.
+            </summary>
+        </member>
+        <member name="T:Aquaforest.ExtendedOCR.Shared.WordData">
+            <summary>
+            Contains information about a word recognised by Extended OCR.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Shared.WordData.Bottom">
+            <summary>
+            Gets the Y-coordinate of the bottom edge of the word in pixels.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Shared.WordData.CharacterList">
+            <summary>
+            Gets the list of blobs (characters) in the word.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Shared.WordData.Height">
+            <summary>
+            Gets the height of the word in pixels.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Shared.WordData.Left">
+            <summary>
+            Gets the X-coordinate of the left edge of the word in pixels.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Shared.WordData.Right">
+            <summary>
+            Gets the X-coordinate of the right edge of the word in pixels.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Shared.WordData.Top">
+            <summary>
+            Gets the Y-coordinate of the top edge of the word in pixels.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Shared.WordData.Width">
+            <summary>
+            Gets the width of the word in pixels.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Shared.WordData.Word">
+            <summary>
+            Gets the string representation of the word.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Shared.WordData.ConfidenceScore">
+            <summary>
+            The average confidence score of the recognised word. The confidence score ranges from 0 (best confidence) to 255 (worst confidence). <para />
+            <b>Note: </b> <see cref="P:Aquaforest.ExtendedOCR.Api.Ocr.GetAdvancedOCRData"/> must be set to 'True' to get the confidence score.
+            </summary>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Shared.WordData.Add(Aquaforest.ExtendedOCR.Shared.CharacterData)">
+            <summary>
+            Add the specified <see cref="T:Aquaforest.ExtendedOCR.Shared.CharacterData"/>.
+            </summary>
+            <param name="characterData">The <see cref="T:Aquaforest.ExtendedOCR.Shared.CharacterData"/> to add.</param>
+        </member>
+        <member name="T:Aquaforest.ExtendedOCR.Shared.Words">
+            <summary>
+            This class contains a collection of WordData objects which are available on a page by page basis.
+            </summary>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Shared.Words.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Aquaforest.ExtendedOCR.Shared.Words"/> class.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Shared.Words.Count">
+            <summary>
+            Gets the number of items contained in the IList.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Shared.Words.Height">
+            <summary>
+            Gets the height of the character at the current index.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Shared.Words.IsReadOnly">
+            <summary>
+            Gets a value indicating whether the IList is read-only.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Shared.Words.Width">
+            <summary>
+            Gets the width of the character at the current index.
+            </summary>
+        </member>
+        <member name="P:Aquaforest.ExtendedOCR.Shared.Words.Item(System.Int32)">
+            <summary>
+            Gets or sets the element at the specified index.
+            </summary>
+            <param name="index">The zero-based index of the element to get or set. </param>
+            <returns>The element at the specified index.</returns>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Shared.Words.Add(Aquaforest.ExtendedOCR.Shared.WordData)">
+            <summary>
+            Adds an item to the IList.
+            </summary>
+            <param name="item">The WordData to add to the IList.</param>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Shared.Words.Clear">
+            <summary>
+            Removes all items from the IList.
+            </summary>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Shared.Words.Contains(Aquaforest.ExtendedOCR.Shared.WordData)">
+            <summary>
+            Determines whether the IList contains the specified item.
+            </summary>
+            <param name="item">The item to locate in the IList.</param>
+            <returns>true if the item is found; otherwise, false.</returns>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Shared.Words.CopyTo(Aquaforest.ExtendedOCR.Shared.WordData[],System.Int32)">
+            <summary>
+            Copies the elements of the IList to an Array, starting at a particular Array index.
+            </summary>
+            <param name="array">The one-dimensional Array that is the destination of the elements copied from IList. The Array must have zero-based indexing. </param>
+            <param name="arrayIndex">The zero-based index in array at which copying begins. </param>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Shared.Words.GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the collection.
+            </summary>
+            <returns>An IEnumerator object that can be used to iterate through the collection of WordData.</returns>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Shared.Words.GetFirst">
+            <summary>
+            Gets the first item in the IList.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Shared.Words.GetHeight(System.Int32)">
+            <summary>
+            Gets the height of the item at the specified index.
+            </summary>
+            <param name="index">The zero-based index of the item.</param>
+            <returns>The height of the item at the specified index if found in the list; otherwise, 0.</returns>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Shared.Words.GetNext">
+            <summary>
+            Gets the next item in the IList.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Shared.Words.GetWidth(System.Int32)">
+            <summary>
+            Gets the width of the item at the specified index.
+            </summary>
+            <param name="index">The zero-based index of the item.</param>
+            <returns>The width of the item at the specified index if found in the list; otherwise, 0.</returns>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Shared.Words.IndexOf(Aquaforest.ExtendedOCR.Shared.WordData)">
+            <summary>
+            Determines the index of the specified item in the IList.
+            </summary>
+            <param name="item">The item to locate in the IList.</param>
+            <returns>The index of value if found in the list; otherwise, -1.</returns>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Shared.Words.Insert(System.Int32,Aquaforest.ExtendedOCR.Shared.WordData)">
+            <summary>
+            Inserts an item to the IList at the specified index.
+            </summary>
+            <param name="index">The zero-based index at which value should be inserted.</param>
+            <param name="item">The item to insert into the IList.</param>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Shared.Words.Remove(Aquaforest.ExtendedOCR.Shared.WordData)">
+            <summary>
+            Removes the first occurrence of a specific item from the IList.
+            </summary>
+            <param name="item">The item to remove from the IList.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Aquaforest.ExtendedOCR.Shared.Words.RemoveAt(System.Int32)">
+            <summary>
+            Removes the IList item at the specified index.
+            </summary>
+            <param name="index">The zero-based index of the item to remove. </param>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Properties>
+  <ImagePreProcessingDefaults>
+    <Autorotate>true</Autorotate>
+    <Binarization>
+      <Binarize>true</Binarize>
+      <!--
+      BinarizationMode
+      0 = Threshold binarization
+      1 = Adaptive binarization
+      -->
+      <BinarizationMode>1</BinarizationMode>
+      <Brightness>128</Brightness>
+      <Contrast>40</Contrast>
+      <SmoothingLevel>248</SmoothingLevel>
+      <Threshold>0</Threshold>
+      <Undithering>false</Undithering>
+    </Binarization>
+    <BlankPageRemoval>
+      <DetectBlankPage>true</DetectBlankPage>
+      <RemoveBlankPage>false</RemoveBlankPage>
+      <Sensitivity>1</Sensitivity>
+    </BlankPageRemoval>
+    <Deskew>false</Deskew>
+    <AdvancedDeskew>
+      <!--
+      DeskewAdjustmentMode
+      0 = None,
+      1 = Crop,
+      2 = Crop if possible,
+      3 = Content aware resize
+      -->
+      <AdjustmentMode></AdjustmentMode>
+      <ForceDeskew></ForceDeskew>
+    </AdvancedDeskew>
+    <Despeckle>0</Despeckle>
+    <AdvancedDespeckle>
+      <RemoveWhitePixels>false</RemoveWhitePixels>
+      <Dilate>0</Dilate>
+    </AdvancedDespeckle>
+    <ForceTableZones>False</ForceTableZones>
+    <Interpolation>
+      <Interpolate>false</Interpolate>
+      <InterpolationMode>0</InterpolationMode>
+      <TargetResolution>300</TargetResolution>
+    </Interpolation>
+    <KeepOriginalImage>true</KeepOriginalImage>
+    <KeepDeskew>false</KeepDeskew>
+    <KeepDespeckle>false</KeepDespeckle>
+    <KeepDarkBorderRemoval>false</KeepDarkBorderRemoval>
+    <KeepPunchHoleRemoval>false</KeepPunchHoleRemoval>
+    <LineRemoval>
+      <RemoveLines>true</RemoveLines>
+      <HorizontalCleanX>1</HorizontalCleanX>
+      <HorizontalCleanY>1</HorizontalCleanY>
+      <HorizontalDilate>1</HorizontalDilate>
+      <HorizontalMaxGap>2</HorizontalMaxGap>
+      <HorizontalMaxThickness>16</HorizontalMaxThickness>
+      <HorizontalMinLength>128</HorizontalMinLength>
+      <VerticalCleanX>1</VerticalCleanX>
+      <VerticalCleanY>1</VerticalCleanY>
+      <VerticalDilate>1</VerticalDilate>
+      <VerticalMaxGap>2</VerticalMaxGap>
+      <VerticalMaxThickness>16</VerticalMaxThickness>
+      <VerticalMinLength>128</VerticalMinLength>
+    </LineRemoval>
+    <!--
+    NonImagePdf
+    0 = OCR: The document will be OCRed using the image extraction method defined by "ExtractImageMethod".
+    1 = RaiseError: The task will terminate with an error. If "ContinueOnError" is set this then behaves as Skip.
+    2 = Skip: The document will not be processed.
+    3 = PassThrough: The file will not be processed, but a copy of the document will be made and named as if the processing had occurred.
+    -->
+    <NonImagePdf>0</NonImagePdf>
+    <PdfImageExtraction>
+      <ExtractImageMethod>0</ExtractImageMethod> <!-- 0 = Native, 1 = Convert To Tiff -->
+      <PdfToImageBpp></PdfToImageBpp> <!-- Force the Bit Per Pixel to use on the rasterized image when using engine 1. -->
+      <PdfToImageDpi></PdfToImageDpi> <!-- Values: 72, 100, 150, 200, 300, 400, 500, 600 -->
+      <PdfToImageCompression></PdfToImageCompression> <!-- For compression. Valid values CCITT4 or LZW -->
+      <PdfToImageMinRes>200</PdfToImageMinRes>
+      <PdfToImageMaxRes>600</PdfToImageMaxRes>
+      <PdfToImageForceVectorCheck>false</PdfToImageForceVectorCheck>
+      <PdfToImageIncludeText>false</PdfToImageIncludeText> <!-- Visible text -->
+      <RemoveExistingPDFText></RemoveExistingPDFText> <!-- Hidden Text -->
+    </PdfImageExtraction>
+    <RemoveDarkBorders>false</RemoveDarkBorders>
+    <RemovePunchHoles>false</RemovePunchHoles>
+  </ImagePreProcessingDefaults>
+  <OutputSettings>
+    <Author></Author>
+    <CreationDate></CreationDate>
+    <EmbedFonts></EmbedFonts>
+    <EnableCsvOutput></EnableCsvOutput>
+    <EnableDocxOutput></EnableDocxOutput>
+    <EnableEpubOutput></EnableEpubOutput>
+    <EnableExcelMlOutput></EnableExcelMlOutput>
+    <EnableHtmlOutput></EnableHtmlOutput>
+    <EnableOpenDocumentTextOutput></EnableOpenDocumentTextOutput>
+    <EnablePdfOutput></EnablePdfOutput>
+    <EnableRtfOutput></EnableRtfOutput>
+    <EnableTextOutput></EnableTextOutput>
+    <EnableWordMlOutput></EnableWordMlOutput>
+    <EnableXlsxOutput></EnableXlsxOutput>
+    <EnableXpsOutput></EnableXpsOutput>
+    <IHQCCompression>
+      <EnableIHQCCompression>false</EnableIHQCCompression>
+      <IHQCCompressionLevel></IHQCCompressionLevel>
+      <IHQCQualityFactor></IHQCQualityFactor>
+      <AdvancedBrightness></AdvancedBrightness>
+      <AdvancedContrast></AdvancedContrast>
+      <AdvancedFactorPhoto></AdvancedFactorPhoto>
+      <AdvancedSmooth></AdvancedSmooth>
+      <AutoAdjust></AutoAdjust>
+      <HighResolutionForeground></HighResolutionForeground>
+      <MinOutputResolution></MinOutputResolution>
+      <SegmentationMode></SegmentationMode>
+      <Smoothing></Smoothing>
+      <IHQCThreshold></IHQCThreshold>
+    </IHQCCompression>
+    <Layout>0</Layout> <!-- 0 = Standard, 1 = Flow -->
+    <ModifiedDate></ModifiedDate>
+    <!--
+    PDF Version
+    0 = PDF_1_4: PDF 1.4 - 2001 - Acrobat 5.0 + JBIG2; RC4 encryption key lengths greater than 40bits (128bits); Extensible Metadata Platform (XMP); Tagged PDF
+    1 = PDF_1_4_Ab: PDF 1.4 A-1b
+    2 = PDF_1_4Aa: PDF 1.4 A-1a
+    3 = PDF_1_5: PDF 1.5 - 2003 - Acrobat 6.0 + JPEG 2000
+    4 = PDF_1_6: PDF 1.6 - 2005 - Acrobat 7.0 + AES encryption
+    5 = PDF_1_7: PDF 1.7 - 2006 - Acrobat 8.0 -> 2008 - ISO 32000-1:2008
+    6 = PDF_1_7_A2b: PDF 1.7 A-2b
+    7 = PDF_1_7_A2a: PDF 1.7 A-2a
+    8 = PDF_1_7_3: PDF 1.7 - 2008 - Adobe Extension Level 3 / Acrobat 9.0 + 256-bit AES encryption
+    9 = PDF_1_7_5: PDF 1.7 - 2009 - Adobe Extension Level 5 / Acrobat 9.1
+    10 = PDF_1_7_8: PDF 1.7 - 2011 - Adobe Extension Level 8 / Acrobat X
+    -->
+    <PDFVersion>0</PDFVersion>
+    <PDFImageCompression>
+      <Jpeg2000Compression>
+        <EnableJpeg2000Compression>false</EnableJpeg2000Compression>
+        <!--
+        Jpeg2000CompressionMode
+        0 = Quality Factor
+        1 = Target File Size
+        2 = Compression Ratio
+        -->
+        <Jpeg2000CompressionMode></Jpeg2000CompressionMode>
+        <Jpeg2000CompressionValue></Jpeg2000CompressionValue>
+      </Jpeg2000Compression>
+      <QualityFactor>192</QualityFactor>
+    </PDFImageCompression>
+    <ReadBmpViaFreeImage>False</ReadBmpViaFreeImage>
+    <RetainBookmarks>False</RetainBookmarks>
+    <RetainCreationDate>False</RetainCreationDate>
+    <RetainMetadata>False</RetainMetadata>
+    <RetainModifiedDate>False</RetainModifiedDate>
+    <RetainViewerPreferences>False</RetainViewerPreferences>
+    <ValidatePDFA>False</ValidatePDFA>
+  </OutputSettings>
+  <General>
+    <AsianOCREngine></AsianOCREngine> <!-- 0 = OcrAsian1, 1 = OcrAsian2 -->
+    <EnableConsoleOutput>true</EnableConsoleOutput>
+    <EnableDebugOutput>false</EnableDebugOutput>
+    <GetAdvancedOCRData>false</GetAdvancedOCRData>
+    <Language>0</Language>
+    <LanguageDetection>false</LanguageDetection>
+    <LogToFile>false</LogToFile>
+    <NoOcr>false</NoOcr>
+    <TempFolder></TempFolder>
+    <CharactersPerInch></CharactersPerInch>
+    <LimitCharsetCharacters></LimitCharsetCharacters>
+    <UserLexicon></UserLexicon>
+    <!--
+    TextDirection (Only for Asian languages)
+    0 = Unknown
+    1 = LeftToRight
+    2 = TopToBottom
+    3 = RightToLeft
+    -->
+    <TextDirection></TextDirection>
+    <!--
+    TextSpacing
+    0 = Fixed
+    1 = Proportional
+    2 = Unknown (default)
+    -->
+    <TextSpacing></TextSpacing>
+    <!--
+    TextType
+    0 = Normal text (default)
+    1 = Dot matrix text
+    -->
+    <TextType></TextType>
+    <ThreadCount>1</ThreadCount>
+    <WorkDepth>255</WorkDepth>
+  </General>
+  <Timeouts>
+    <GetPdfTextTimeout>20000</GetPdfTextTimeout>
+    <PdfToImageExtractionTimeout>100000</PdfToImageExtractionTimeout>
+    <ProcessPageTimeout>150000</ProcessPageTimeout>
+  </Timeouts>
+</Properties>
