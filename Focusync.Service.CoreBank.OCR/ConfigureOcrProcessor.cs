@@ -81,7 +81,9 @@ namespace Focusync.Service.CoreBank.OCR
 
                     for (int i = 1; i <= ocr.NumberPages && i <= ocr.EndPage; i++)
                     {
-                        lines.AddRange(ocr.ReadPageLines(i));
+                        var pageLines = ocr.ReadPageLines(i);
+                        if (pageLines?.Count > 0)
+                            lines.AddRange(pageLines);
                     }
                 }
                 catch (Exception)
@@ -116,28 +118,31 @@ namespace Focusync.Service.CoreBank.OCR
             for (int pageNo = 0; pageNo < ocr.NumberPages; pageNo++)
             {
                 var lines = ocr.ReadPageLines(pageNo + 1);
-                int i = 0;
-                for (i = 0; i < lines.Count; i++)
+                if (lines?.Count > 0)
                 {
-                    if (sigRegex.IsMatch(lines[i].LineWords))
+                    int i = 0;
+                    for (i = 0; i < lines.Count; i++)
                     {
-                        break;
-                    }
-                }
-                int idcount = 0;
-                while (i < lines.Count && idcount < 3)
-                {
-                    string temp = lines[i].LineWords;
-                    if (temp.Length > 26)
-                    {
-                        if (i == 0)
+                        if (sigRegex.IsMatch(lines[i].LineWords))
                         {
-                            temp = (temp[0] == '1' ? 'I' : temp[0]).ToString().Replace("1", "I") + temp.Substring(1);
+                            break;
                         }
-                        temp = temp.PadRight(30, '<');
-                        sigbuild.Append(temp);
                     }
-                    i++;
+                    int idcount = 0;
+                    while (i < lines.Count && idcount < 3)
+                    {
+                        string temp = lines[i].LineWords;
+                        if (temp.Length > 26)
+                        {
+                            if (i == 0)
+                            {
+                                temp = (temp[0] == '1' ? 'I' : temp[0]).ToString().Replace("1", "I") + temp.Substring(1);
+                            }
+                            temp = temp.PadRight(30, '<');
+                            sigbuild.Append(temp);
+                        }
+                        i++;
+                    }
                 }
             }
             string result = sigbuild.ToString();
@@ -218,7 +223,9 @@ namespace Focusync.Service.CoreBank.OCR
                                 var licenseLines = new List<LineData>();
                                 for (int i = 1; i <= ocr.NumberPages && i <= ocr.EndPage; i++)
                                 {
-                                    licenseLines.AddRange(ocr.ReadPageLines(i));
+                                    var pageLines = ocr.ReadPageLines(i);
+                                    if (pageLines?.Count > 0)
+                                        licenseLines.AddRange(pageLines);
                                 }
                                 // currently 'dubai' is hardcoded, required changes to fetch it from Application
                                 result = TradeLicenseParserFactory.Parse(licenseLines, "DUBAIECONOMY", "LLC");
@@ -228,30 +235,33 @@ namespace Focusync.Service.CoreBank.OCR
                                 for (int pageNo = 0; pageNo < ocr.NumberPages; pageNo++)
                                 {
                                     var lines = ocr.ReadPageLines(pageNo + 1);
-                                    int i = 0;
-                                    for (i = 0; i < lines.Count; i++)
+                                    if (lines?.Count > 0)
                                     {
-                                        Regex re = new Regex(@"(P|V|C)(<|«)(.*)");
-                                        if (re.IsMatch(lines[i].LineWords))
+                                        int i = 0;
+                                        for (i = 0; i < lines.Count; i++)
                                         {
-                                            break;
+                                            Regex re = new Regex(@"(P|V|C)(<|«)(.*)");
+                                            if (re.IsMatch(lines[i].LineWords))
+                                            {
+                                                break;
+                                            }
                                         }
-                                    }
-                                    int counti = 0;
-                                    while (i < lines.Count && counti < 2) //only two lines to be read as passport has only two line MRZ as per standard
-                                    {
-                                        string temp = lines[i].LineWords;
-                                        temp = temp.TrimEnd().Replace("«", "<<").Replace("&", "<").Replace("\n", "").Replace(" ", "");
-                                        temp = System.Text.RegularExpressions.Regex.Replace(temp, "[']+", "");
-                                        if (counti == 0)
+                                        int counti = 0;
+                                        while (i < lines.Count && counti < 2) //only two lines to be read as passport has only two line MRZ as per standard
                                         {
-                                            temp = Regex.Replace(temp, ".*P<", "P<");
-                                        }
-                                        temp = temp.Substring(0, Math.Min(temp.Length, 44));
-                                        temp = temp.PadRight(44, '<');
+                                            string temp = lines[i].LineWords;
+                                            temp = temp.TrimEnd().Replace("«", "<<").Replace("&", "<").Replace("\n", "").Replace(" ", "");
+                                            temp = System.Text.RegularExpressions.Regex.Replace(temp, "[']+", "");
+                                            if (counti == 0)
+                                            {
+                                                temp = Regex.Replace(temp, ".*P<", "P<");
+                                            }
+                                            temp = temp.Substring(0, Math.Min(temp.Length, 44));
+                                            temp = temp.PadRight(44, '<');
 
-                                        build.Append(temp);
-                                        i++;
+                                            build.Append(temp);
+                                            i++;
+                                        }
                                     }
                                 }
                                 result = build.ToString();
