@@ -179,7 +179,7 @@ namespace TradeLicense
             for (i = 0; i < lines.Count; i++)
             {
                 string data = lines[i].LineWords.Trim();
-                if (Regex.IsMatch(data, ".*(Trade.Name|Licensee|operating.name).*", RegexOptions.IgnoreCase))
+                if (Regex.IsMatch(data, ".*(Trade.Name|Licensee|operating.name|company.name).*", RegexOptions.IgnoreCase))
                 {
                     lineFound = i + 1;
                     break;

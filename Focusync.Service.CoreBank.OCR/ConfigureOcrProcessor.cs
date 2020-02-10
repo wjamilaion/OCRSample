@@ -302,7 +302,7 @@ namespace Focusync.Service.CoreBank.OCR
             ocr.License = license;
             ocr.TempFolder = Path.Combine(tempPath, Guid.NewGuid().ToString());
             ocr.Language = SupportedLanguages.English;
-            ocr.EnableTextOutput = true;
+            ocr.EnableDebugOutput = true;
             ocr.GetAdvancedOCRData = true;
             ocr.LogToFile = true;
             //ocr.HandleExceptionsInternally = false;
