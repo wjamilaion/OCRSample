@@ -86,6 +86,8 @@
     <Compile Include="MRZParser.cs" />
     <Compile Include="NationalityLookup.cs" />
     <Compile Include="Parser\TradeLicense\Company\AbuDhabiTradeParser.cs" />
+    <Compile Include="Parser\TradeLicense\Company\DAFZTradeParser.cs" />
+    <Compile Include="Parser\TradeLicense\Company\DWCTradeParser.cs" />
     <Compile Include="Parser\TradeLicense\Company\DMCCTradeParser.cs" />
     <Compile Include="Parser\TradeLicense\Company\DIFCTradeParser.cs" />
     <Compile Include="Parser\TradeLicense\Company\DubaiCCATradeParser.cs" />

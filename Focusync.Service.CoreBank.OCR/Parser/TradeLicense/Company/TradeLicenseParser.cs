@@ -101,7 +101,7 @@ namespace TradeLicense
             for (i = 0; i < lines.Count; i++)
             {
                 string data = lines[i].LineWords.Trim();
-                if (Regex.IsMatch(data, "(Expiry Date|valid till).*", RegexOptions.IgnoreCase))
+                if (Regex.IsMatch(data, "(Expiry Date|Expiny Date|valid till).*", RegexOptions.IgnoreCase))
                 {
                     break;
                 }

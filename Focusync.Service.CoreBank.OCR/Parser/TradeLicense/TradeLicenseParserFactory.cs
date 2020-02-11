@@ -17,6 +17,8 @@ namespace TradeLicense
         public const string JABELALI = "JABELALI";
         public const string DIFC = "DIFC";
         public const string DMCC = "DMCC";
+        public const string DAFZ = "DAFZ";
+        public const string DWC = "DWC";
     }
     class TradeLicenseParserFactory
     {
@@ -45,6 +47,12 @@ namespace TradeLicense
                     break;
                 case IssuingAuth.DMCC:
                     tradeLicense = new DMCCTradeParser();
+                    break;
+                case IssuingAuth.DAFZ:
+                    tradeLicense = new DAFZTradeParser();
+                    break;
+                case IssuingAuth.DWC:
+                    tradeLicense = new DWCTradeParser();
                     break;
                 default:
                     throw new NotImplementedException(string.Format("'{0}' not implemented", issuingAuth));
