@@ -19,6 +19,7 @@ namespace TradeLicense
         public const string DMCC = "DMCC";
         public const string DAFZ = "DAFZ";
         public const string DWC = "DWC";
+        public const string FujairahFZ = "FUJAIRAHFZ";
     }
     class TradeLicenseParserFactory
     {
@@ -53,6 +54,9 @@ namespace TradeLicense
                     break;
                 case IssuingAuth.DWC:
                     tradeLicense = new DWCTradeParser();
+                    break;
+                case IssuingAuth.FujairahFZ:
+                    tradeLicense = new FujairahFZTradeParser();
                     break;
                 default:
                     throw new NotImplementedException(string.Format("'{0}' not implemented", issuingAuth));
